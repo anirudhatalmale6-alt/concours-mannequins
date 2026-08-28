@@ -1,0 +1,339 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+.cms{--ink:#1c1a24;--mut:#8b8698;--line:#ececf1;--soft:#faf9fc;--tint:#f2f0f6;
+ --acc:#1b1922;--deep:#2b2833;--sph1:#f3f1f5;--sph2:#c9c6d0;--sph3:#6f6b7a;
+ font-family:Poppins,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+ color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
+.cms *,.cms *::before,.cms *::after{box-sizing:border-box}
+.cms img{max-width:100%;height:auto;display:block}
+.cms a{color:inherit}
+
+/* Bandes. Une seule bande sombre par page : au-dela, le charbon cesse
+   d'etre un accent et devient le fond. */
+.cms-s{padding:74px 0;background:#fff}
+.cms-s.soft{background:var(--soft)}
+.cms-s.tint{background:var(--tint);border-block:1px solid #e6e3ee}
+.cms-s.ink{background:var(--acc);color:#fff}
+.cms-s.ink h2,.cms-s.ink h3{color:#fff}
+.cms-s.ink p,.cms-s.ink li,.cms-s.ink .cms-sub{color:#c9c6d0}
+.cms-s.ink .cms-eb{color:#a5a1b0}
+.cms-w{max-width:1120px;margin:0 auto;padding:0 22px}
+
+.cms-eb{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--sph3);font-weight:600;margin:0 0 10px}
+.cms h1,.cms h2,.cms h3{margin:0 0 14px;font-weight:600;letter-spacing:-.015em;
+ color:var(--ink);line-height:1.2}
+.cms h1{font-size:44px}
+.cms h2{font-size:31px}
+.cms h3{font-size:17px;margin-bottom:8px}
+.cms p{margin:0 0 14px}
+.cms-sub{font-size:18px;color:#4a4753;max-width:64ch}
+
+/* Le filet a quatre segments : les quatre tons de la sphere, dans l'ordre.
+   Le premier ton de la sphere (#f3f1f5) est invisible sur blanc — on part
+   donc du deuxieme cran, sinon le filet parait casse a gauche. */
+.cms-rail{display:flex;gap:0;height:3px;width:132px;margin:0 0 26px;
+ border-radius:2px;overflow:hidden}
+.cms-rail i{flex:1}
+.cms-rail i:nth-child(1){background:#dcd9e4}
+.cms-rail i:nth-child(2){background:var(--sph2)}
+.cms-rail i:nth-child(3){background:var(--sph3)}
+.cms-rail i:nth-child(4){background:var(--deep)}
+
+/* Sphere du logo, en CSS : nette a toutes les tailles, contrairement au GIF. */
+.cms-sph{width:46px;height:46px;border-radius:50%;flex:0 0 46px;
+ background:radial-gradient(circle at 34% 30%,var(--sph1) 0%,var(--sph2) 34%,
+ var(--sph3) 72%,var(--deep) 100%);
+ box-shadow:inset -5px -7px 14px rgba(0,0,0,.28),0 4px 12px rgba(27,25,34,.18)}
+.cms-brand{display:flex;align-items:center;gap:13px;margin-bottom:26px}
+.cms-brand b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.cms-brand .tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+ background:var(--acc);color:#fff;padding:4px 9px;border-radius:3px;
+ font-weight:600}
+.cms-s.ink .cms-brand .tag{background:#fff;color:var(--acc)}
+
+/* Le bouton doit etre ecrit « a.cms-btn » et pas « .cms-btn » : la regle
+   generique .cms a{color:inherit} porte une classe ET un element, donc elle
+   bat une simple classe. Ecrit .cms-btn seul, le libelle blanc retombait sur
+   l'encre heritee — bouton charbon, texte charbon, libelle invisible. */
+.cms a.cms-btn,.cms button.cms-btn{display:inline-block;background:var(--acc);
+ color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+ padding:14px 26px;border-radius:6px;border:1px solid var(--acc);
+ cursor:pointer;font-family:inherit;line-height:1.4}
+.cms a.cms-btn.ghost,.cms button.cms-btn.ghost{background:transparent;
+ color:var(--ink);border-color:#d8d5e0}
+.cms-s.ink a.cms-btn,.cms-s.ink button.cms-btn{background:#fff;
+ color:var(--acc);border-color:#fff}
+.cms-s.ink a.cms-btn.ghost,.cms-s.ink button.cms-btn.ghost{
+ background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* Grilles */
+.cms-g{display:grid;gap:18px}
+.cms-g.c2{grid-template-columns:repeat(2,1fr)}
+.cms-g.c3{grid-template-columns:repeat(3,1fr)}
+.cms-g.c4{grid-template-columns:repeat(4,1fr)}
+.cms-card{background:#fff;border:1px solid var(--line);border-radius:10px;
+ padding:22px}
+.cms-s.soft .cms-card,.cms-s.tint .cms-card{background:#fff}
+.cms-s.ink .cms-card{background:#241f2d;border-color:rgba(255,255,255,.14)}
+.cms-card p{font-size:14.8px;color:#4a4753;margin:0}
+.cms-s.ink .cms-card p{color:#d6d3de}
+
+/* Etapes numerotees */
+.cms-steps{list-style:none;margin:0;padding:0;counter-reset:e}
+.cms-steps li{counter-increment:e;display:grid;grid-template-columns:44px 1fr;
+ gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.cms-steps li:first-child{border-top:0}
+.cms-steps li::before{content:counter(e,decimal-leading-zero);
+ font-size:14px;font-weight:600;color:var(--sph3);padding-top:2px}
+.cms-steps p{font-size:14.6px;color:#4a4753;margin:0}
+
+/* Tableau de criteres */
+.cms-tab{width:100%;border-collapse:collapse;font-size:14.8px}
+.cms-tab th,.cms-tab td{text-align:left;padding:13px 14px;
+ border-bottom:1px solid var(--line);vertical-align:top}
+.cms-tab th{width:180px;font-weight:600;color:var(--ink)}
+.cms-tab td{color:#4a4753}
+
+/* Emplacements d'images : le cadre a le ratio final, pose des maintenant.
+   Sans lui, la page saute de 300 px le jour ou les photos arrivent. */
+.cms-fig{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.cms-fig .ph{aspect-ratio:3/4;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;padding:18px;
+ background:radial-gradient(120% 120% at 30% 20%,#f6f5f9 0%,#e9e7ef 55%,
+ #dcd9e4 100%)}
+.cms-fig .ph b{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--sph3);margin-bottom:6px}
+.cms-fig .ph span{font-size:12.5px;color:var(--mut);line-height:1.5;
+ word-break:break-all}
+.cms-fig figcaption{font-size:12.5px;color:var(--mut);padding:10px 12px;
+ background:var(--soft)}
+
+/* Catalogue mannequins */
+.cms-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;
+ padding:18px;background:#fff;border:1px solid var(--line);border-radius:10px;
+ margin-bottom:20px;position:sticky;top:0;z-index:5}
+.cms-f{display:flex;flex-direction:column;gap:5px}
+.cms-f label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+ color:var(--sph3);font-weight:600}
+.cms-f select,.cms-f input{font:inherit;font-size:14px;padding:9px 11px;
+ border:1px solid #d8d5e0;border-radius:6px;background:#fff;color:var(--ink);
+ min-width:132px}
+.cms-count{margin-left:auto;font-size:14px;color:var(--mut);padding-bottom:9px}
+.cms-count b{color:var(--ink)}
+
+.cms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cms-mn{border:1px solid var(--line);border-radius:10px;overflow:hidden;
+ background:#fff}
+.cms-mn .cms-fig{border:0;border-radius:0}
+.cms-mn .bd{padding:14px 15px 16px}
+.cms-mn .nm{display:flex;align-items:baseline;justify-content:space-between;
+ gap:8px;margin-bottom:2px}
+.cms-mn .nm b{font-size:16px;font-weight:600}
+.cms-mn .nm i{font-style:normal;font-size:11.5px;color:var(--mut)}
+.cms-mn .loc{font-size:13px;color:var(--mut);margin-bottom:10px}
+.cms-mn dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;
+ font-size:13px}
+.cms-mn dt{color:var(--mut)}
+.cms-mn dd{margin:0;color:#4a4753}
+.cms-mn .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.cms-mn .tags span{font-size:11px;letter-spacing:.04em;background:var(--tint);
+ color:#4a4753;padding:4px 9px;border-radius:20px}
+.cms-mn .dispo{font-size:11.5px;font-weight:600;padding:3px 9px;
+ border-radius:20px;background:#eaf6ee;color:#1f7a45}
+.cms-mn .dispo.non{background:#f3f1f5;color:var(--mut)}
+.cms-vide{padding:44px 20px;text-align:center;color:var(--mut);
+ border:1px dashed #d8d5e0;border-radius:10px;font-size:15px}
+
+/* Formulaire de candidature */
+.cms-form{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.cms-form .full{grid-column:1/-1}
+.cms-form label{display:block;font-size:12px;letter-spacing:.1em;
+ text-transform:uppercase;color:var(--sph3);font-weight:600;margin-bottom:6px}
+.cms-form input,.cms-form select,.cms-form textarea{width:100%;font:inherit;
+ font-size:15px;padding:12px 13px;border:1px solid #d8d5e0;border-radius:6px;
+ background:#fff}
+.cms-form textarea{min-height:112px;resize:vertical}
+.cms-cons{grid-column:1/-1;display:flex;gap:11px;align-items:flex-start;
+ background:var(--soft);border:1px solid var(--line);border-radius:8px;
+ padding:15px}
+.cms-cons input{width:17px;height:17px;margin-top:3px;flex:0 0 17px}
+.cms-cons span{font-size:13.6px;color:#4a4753;line-height:1.55}
+
+.cms-note{font-size:13.4px;color:var(--mut);border-left:2px solid var(--sph2);
+ padding-left:14px;margin-top:18px}
+.cms-s.ink .cms-note{border-left-color:var(--sph3);color:#a5a1b0}
+
+.cms-faq{border-top:1px solid var(--line)}
+.cms-faq details{border-bottom:1px solid var(--line)}
+.cms-faq summary{cursor:pointer;padding:17px 0;font-weight:600;font-size:16px;
+ list-style:none}
+.cms-faq summary::-webkit-details-marker{display:none}
+.cms-faq summary::after{content:"+";float:right;color:var(--mut);
+ font-weight:400;font-size:20px;line-height:1}
+.cms-faq details[open] summary::after{content:"\2212"}
+.cms-faq .a{padding:0 40px 18px 0;font-size:15px;color:#4a4753}
+
+.cms-nav{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;
+ padding:16px 0;border-top:1px solid var(--line);
+ border-bottom:1px solid var(--line);margin-bottom:0}
+.cms-nav a{color:#4a4753;text-decoration:none}
+.cms-nav a:hover{color:var(--ink);text-decoration:underline}
+
+@media (max-width:960px){
+ .cms-grid{grid-template-columns:repeat(3,1fr)}
+ .cms-g.c4{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+ .cms h1{font-size:32px}
+ .cms h2{font-size:25px}
+ .cms-s{padding:52px 0}
+ .cms-g.c2,.cms-g.c3,.cms-g.c4{grid-template-columns:1fr}
+ .cms-grid{grid-template-columns:repeat(2,1fr)}
+ .cms-form{grid-template-columns:1fr}
+ .cms-bar{position:static}
+ .cms-tab th{width:auto;display:block;padding-bottom:2px;border-bottom:0}
+ .cms-tab td{display:block;padding-top:0}
+}
+@media (max-width:460px){
+ .cms-grid{grid-template-columns:1fr}
+}
+</style>
+<div class="cms">
+<section class="cms-s"><div class="cms-w">
+<div class="cms-brand"><div class="cms-sph"></div><b>Concours Horizon</b><span class="tag">Edition 2027</span></div>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<h1>Un concours de miss pense pour les candidates : un reglement ecrit, un jury nomme, des etapes datees.</h1>
+<p class="cms-sub">Candidatures ouvertes aux residentes du Quebec de 18 ans et plus. Inscription gratuite.</p>
+<table class="cms-tab" style="max-width:560px;margin-top:24px"><tr><th>Finale</th><td>[DATE A CONFIRMER]</td></tr><tr><th>Lieu</th><td>[SALLE A CONFIRMER], Montreal</td></tr><tr><th>Candidatures</th><td>Gratuites, en ligne, jusqu'a [DATE A CONFIRMER]</td></tr></table>
+<p style="margin-top:22px"><a class="cms-btn" href="#candidature">Deposer ma candidature</a> <a class="cms-btn ghost" href="#etapes">Voir les etapes</a></p>
+<nav class="cms-nav" style="margin-top:34px"><a href="#etapes">Les etapes</a><a href="#criteres">Qui peut candidater</a><a href="#prix">Ce que gagnent les finalistes</a><a href="#jury">Le jury</a><a href="#candidature">Candidature</a><a href="#faq">Questions</a></nav>
+</div></section>
+<section class="cms-s soft"><div class="cms-w">
+<div class="cms-g c2" style="gap:44px;align-items:center">
+<div>
+<p class="cms-eb">Le principe</p>
+<h2>Un concours ou tout est ecrit avant de commencer</h2>
+<p>Les dates, les criteres, le jury, la dotation : tout est publie avant l'ouverture des candidatures, pas annonce au fur et a mesure. Une candidate doit savoir a quoi elle s'engage le jour ou elle remplit le formulaire.</p>
+<p>L'inscription est gratuite, sans frais de dossier et sans tenue a acheter. Chaque candidature recoit une reponse, retenue ou non.</p>
+</div>
+<figure class="cms-fig" data-img="images/concours-scene.jpg" data-ratio="16/9"><div class="ph"><b>Image a deposer</b><span>images/concours-scene.jpg</span></div></figure>
+</div></div></section>
+<section class="cms-s" id="etapes"><div class="cms-w">
+<p class="cms-eb">Le parcours</p>
+<h2>Cinq etapes, de la candidature a la finale</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<ol class="cms-steps">
+<li><div><h3>Candidature en ligne</h3><p>Le formulaire en bas de page. Deux photos recentes suffisent : une de visage, une en pied. Pas de book professionnel exige — c&#x27;est justement ce que le concours doit apporter.</p></div></li>
+<li><div><h3>Presalection sur dossier</h3><p>Le comite lit toutes les candidatures. Chaque candidate recoit une reponse, retenue ou non. Une candidature sans reponse est une candidate perdue pour l&#x27;edition suivante.</p></div></li>
+<li><div><h3>Casting regional</h3><p>Rencontre de groupe : presentation, demarche, entretien court. Filme uniquement avec accord ecrit, et jamais diffuse sans un second accord.</p></div></li>
+<li><div><h3>Demi-finale</h3><p>Les candidates retenues travaillent la scene avec un coach. C&#x27;est la que se decide le tableau final.</p></div></li>
+<li><div><h3>Finale publique</h3><p>Soiree ouverte au public, jury nomme a l&#x27;avance, resultats annonces le soir meme.</p></div></li>
+</ol>
+</div></section>
+<section class="cms-s tint" id="criteres"><div class="cms-w">
+<div class="cms-g c2" style="gap:44px;align-items:start">
+<div>
+<p class="cms-eb">Admissibilite</p>
+<h2>Qui peut candidater</h2>
+<table class="cms-tab">
+<tr><th>Age</th><td>18 ans revolus au jour de la finale.</td></tr>
+<tr><th>Residence</th><td>Resider au Quebec depuis au moins six mois.</td></tr>
+<tr><th>Taille</th><td>Aucun minimum. Un concours de miss n&#x27;est pas un casting de defile — le catalogue mannequin, lui, a ses criteres.</td></tr>
+<tr><th>Etat civil</th><td>Sans condition. Ni le statut matrimonial ni la maternite n&#x27;entrent dans les criteres.</td></tr>
+<tr><th>Casier</th><td>Aucune verification n&#x27;est demandee a la candidature. La lauréate signe un engagement de representation.</td></tr>
+<tr><th>Frais</th><td>Aucun. Ni inscription, ni dossier, ni tenue a acheter.</td></tr>
+</table>
+<p class="cms-note">Ces criteres sont ceux du reglement. Tant que le reglement complet n'est pas en ligne et telechargeable, cette page affiche un lien inactif plutot qu'un lien qui promet un document inexistant.</p>
+</div>
+<figure class="cms-fig" data-img="images/concours-coulisses.jpg" data-ratio="3/4"><div class="ph"><b>Image a deposer</b><span>images/concours-coulisses.jpg</span></div></figure>
+</div></div></section>
+<section class="cms-s" id="prix"><div class="cms-w">
+<p class="cms-eb">Dotation</p>
+<h2>Ce que gagnent les finalistes</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<div class="cms-g c3">
+<div class="cms-card"><h3>La lauréate</h3><ul style="margin:0;padding-left:18px;font-size:14.6px;color:#4a4753">
+<li>Le titre pour un an et le contrat de representation qui va avec.</li>
+<li>Un book professionnel complet, shoote et retouche.</li>
+<li>Une dotation en numeraire — montant a fixer, annonce avant l&#x27;ouverture des candidatures.</li>
+</ul></div>
+<div class="cms-card"><h3>Les deux dauphines</h3><ul style="margin:0;padding-left:18px;font-size:14.6px;color:#4a4753">
+<li>Book professionnel.</li>
+<li>Entree directe au catalogue mannequins.</li>
+</ul></div>
+<div class="cms-card"><h3>Toutes les finalistes</h3><ul style="margin:0;padding-left:18px;font-size:14.6px;color:#4a4753">
+<li>Les photos de la finale, libres d&#x27;usage pour leur propre book.</li>
+<li>Une fiche au catalogue si elles le souhaitent.</li>
+</ul></div>
+</div>
+<p class="cms-note">Le montant de la dotation en numeraire doit etre fixe et annonce AVANT l'ouverture des candidatures. Un montant annonce apres coup se discute ; un montant annonce d'avance engage l'organisateur, et c'est ce qui rassure les candidates.</p>
+</div></section>
+<section class="cms-s ink" id="jury"><div class="cms-w">
+<p class="cms-eb">Le jury</p>
+<h2>Nomme avant l'ouverture des candidatures</h2>
+<p class="cms-sub" style="color:#c9c6d0">Un jury annonce apres la selection ne rassure personne. Cinq sieges, chacun nomme et publie ici avec sa fonction.</p>
+<div class="cms-g c3" style="margin-top:26px">
+<div class="cms-card"><h3>[NOM]</h3><p style="font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#a5a1b0;margin-bottom:6px">Presidence du jury</p><p>A nommer avant l&#x27;ouverture des candidatures.</p></div>
+<div class="cms-card"><h3>[NOM]</h3><p style="font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#a5a1b0;margin-bottom:6px">Direction artistique</p><p>A nommer.</p></div>
+<div class="cms-card"><h3>[NOM]</h3><p style="font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#a5a1b0;margin-bottom:6px">Representation des editions precedentes</p><p>A nommer.</p></div>
+<div class="cms-card"><h3>[NOM]</h3><p style="font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#a5a1b0;margin-bottom:6px">Partenaire principal</p><p>A nommer.</p></div>
+<div class="cms-card"><h3>[NOM]</h3><p style="font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#a5a1b0;margin-bottom:6px">Presse</p><p>A nommer.</p></div>
+</div>
+<div style="max-width:620px;margin-top:30px">
+<figure class="cms-fig" data-img="images/concours-jury.jpg" data-ratio="16/9"><div class="ph"><b>Image a deposer</b><span>images/concours-jury.jpg</span></div></figure>
+</div>
+</div></section>
+<section class="cms-s soft" id="candidature"><div class="cms-w">
+<p class="cms-eb">Candidature</p>
+<h2>Deposer sa candidature</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<p class="cms-sub">Inscription gratuite. Deux photos recentes suffisent : une de visage, une en pied, prises au telephone.</p>
+<form class="cms-form" style="margin-top:26px" method="post" action="#" onsubmit="return false">
+<div><label for="c-prenom">Prenom</label><input id="c-prenom" name="prenom" type="text" required></div>
+<div><label for="c-nom">Nom</label><input id="c-nom" name="nom" type="text" required></div>
+<div><label for="c-naissance">Date de naissance</label><input id="c-naissance" name="naissance" type="date" required></div>
+<div><label for="c-ville">Ville de residence</label><input id="c-ville" name="ville" type="text" required></div>
+<div><label for="c-tel">Telephone</label><input id="c-tel" name="tel" type="tel" required></div>
+<div><label for="c-taille">Taille (cm)</label><input id="c-taille" name="taille" type="number" required></div>
+<div class="full"><label for="c-photo">Photos (visage + en pied)</label><input id="c-photo" name="photos" type="file" accept="image/*" multiple></div>
+<div class="full"><label for="c-mot">Pourquoi ce concours ?</label><textarea id="c-mot" name="motivation" placeholder="Quelques lignes suffisent."></textarea></div>
+<label class="cms-cons"><input type="checkbox" name="droit_image" required><span><b>Droit a l'image.</b> J'autorise l'organisateur a utiliser les photos que je depose <b>pour la seule selection</b>. Toute autre utilisation — affiche, reseaux sociaux, presse — fera l'objet d'un accord ecrit distinct.</span></label>
+<label class="cms-cons"><input type="checkbox" name="donnees" required><span><b>Donnees personnelles.</b> Mes coordonnees servent a traiter ma candidature et a rien d'autre. Elles sont effacees a la fin de l'edition si je ne suis pas retenue. Je peux demander leur suppression a tout moment.</span></label>
+<div class="full"><button class="cms-btn" type="submit">Envoyer ma candidature</button></div>
+</form>
+<p class="cms-note"><b>Ce formulaire n'envoie encore rien.</b> Il attend deux choses : l'adresse ou arrivent les candidatures, et l'entite juridique organisatrice pour les mentions legales. Un formulaire branche avant d'avoir ces deux reponses collecte des donnees que personne n'est en mesure de traiter.</p>
+</div></section>
+<section class="cms-s" id="faq"><div class="cms-w">
+<p class="cms-eb">Questions</p>
+<h2>Ce que les candidates demandent</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<div class="cms-faq">
+<details><summary>Le concours est-il payant ?</summary><div class="a">Non. Ni inscription, ni frais de dossier, ni tenue a acheter. Un concours qui fait payer ses candidates n&#x27;est pas un concours, c&#x27;est une billetterie.</div></details>
+<details><summary>Faut-il un book ou de l&#x27;experience ?</summary><div class="a">Non. Deux photos prises au telephone suffisent pour candidater.</div></details>
+<details><summary>Que deviennent mes photos si je ne suis pas retenue ?</summary><div class="a">Elles sont effacees a la fin de l&#x27;edition. Elles ne servent a rien d&#x27;autre qu&#x27;a la selection, et surement pas a une publicite.</div></details>
+<details><summary>Puis-je candidater si j&#x27;ai moins de 18 ans ?</summary><div class="a">Pas a cette edition. Ouvrir aux mineures demande un cadre a part : accord ecrit des deux parents, horaires encadres, categories separees. Ce n&#x27;est pas une case a cocher, c&#x27;est un reglement different.</div></details>
+<details><summary>Y a-t-il une epreuve en maillot ?</summary><div class="a">Non. Le format retenu est : presentation, tenue de ville, tenue de soiree, entretien.</div></details>
+<details><summary>Ou est le reglement complet ?</summary><div class="a">Il doit etre en ligne et telechargeable AVANT la premiere candidature. Tant qu&#x27;il n&#x27;y est pas, la page affiche un lien inactif plutot qu&#x27;un lien qui ment.</div></details>
+</div>
+</div></section>
+</div>
+<script>
+/* Remplace chaque cadre par la vraie image des qu'elle existe. On teste le
+   chargement AVANT de toucher au DOM : si le fichier manque, le cadre nomme
+   reste en place au lieu d'une icone d'image cassee. */
+(function(){
+ var f=document.querySelectorAll('.cms-fig[data-img]');
+ for(var i=0;i<f.length;i++){(function(fig){
+  var src=fig.getAttribute('data-img'),im=new Image();
+  im.onload=function(){
+   var box=fig.querySelector('.ph');if(!box)return;
+   im.style.width='100%';im.style.display='block';
+   im.style.aspectRatio=fig.getAttribute('data-ratio')||'3/4';
+   im.style.objectFit='cover';im.alt='';
+   box.parentNode.replaceChild(im,box);
+  };
+  im.src=src;
+ })(f[i]);}
+})();
+</script>

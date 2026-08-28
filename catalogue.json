@@ -1,0 +1,1080 @@
+[
+ {
+  "id": "MN-001",
+  "prenom": "Amelie",
+  "initiale": "Y.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 177,
+  "confection": 34,
+  "pointure": 39,
+  "cheveux": "Bruns",
+  "yeux": "Bruns",
+  "categories": [
+   "Editorial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": false,
+  "photo": "mannequins/MN-001.jpg"
+ },
+ {
+  "id": "MN-002",
+  "prenom": "Sarah",
+  "initiale": "V.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 171,
+  "confection": 52,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Gris",
+  "categories": [
+   "Grande taille"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "AR"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-002.jpg"
+ },
+ {
+  "id": "MN-003",
+  "prenom": "Ines",
+  "initiale": "A.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 162,
+  "confection": 40,
+  "pointure": 36,
+  "cheveux": "Blonds",
+  "yeux": "Bruns",
+  "categories": [
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": false,
+  "photo": "mannequins/MN-003.jpg"
+ },
+ {
+  "id": "MN-004",
+  "prenom": "Camille",
+  "initiale": "R.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 177,
+  "confection": 38,
+  "pointure": 41,
+  "cheveux": "Bruns",
+  "yeux": "Gris",
+  "categories": [
+   "Commercial",
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "IT"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-004.jpg"
+ },
+ {
+  "id": "MN-005",
+  "prenom": "Noemie",
+  "initiale": "V.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 164,
+  "confection": 36,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Noisette",
+  "categories": [
+   "Beaute",
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "ES"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-005.jpg"
+ },
+ {
+  "id": "MN-006",
+  "prenom": "Lea",
+  "initiale": "I.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 165,
+  "confection": 34,
+  "pointure": 37,
+  "cheveux": "Chatains",
+  "yeux": "Bleus",
+  "categories": [
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-006.jpg"
+ },
+ {
+  "id": "MN-007",
+  "prenom": "Yasmine",
+  "initiale": "T.",
+  "ville": "Mississauga",
+  "province": "ON",
+  "taille_cm": 171,
+  "confection": 40,
+  "pointure": 37,
+  "cheveux": "Blonds",
+  "yeux": "Noisette",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": false,
+  "photo": "mannequins/MN-007.jpg"
+ },
+ {
+  "id": "MN-008",
+  "prenom": "Charlotte",
+  "initiale": "R.",
+  "ville": "Quebec",
+  "province": "QC",
+  "taille_cm": 178,
+  "confection": 36,
+  "pointure": 40,
+  "cheveux": "Bruns",
+  "yeux": "Bleus",
+  "categories": [
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-008.jpg"
+ },
+ {
+  "id": "MN-009",
+  "prenom": "Maya",
+  "initiale": "Y.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 168,
+  "confection": 42,
+  "pointure": 36,
+  "cheveux": "Noirs",
+  "yeux": "Bruns",
+  "categories": [
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-009.jpg"
+ },
+ {
+  "id": "MN-010",
+  "prenom": "Elodie",
+  "initiale": "N.",
+  "ville": "Ottawa",
+  "province": "ON",
+  "taille_cm": 176,
+  "confection": 34,
+  "pointure": 37,
+  "cheveux": "Blonds",
+  "yeux": "Gris",
+  "categories": [
+   "Editorial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": false,
+  "photo": "mannequins/MN-010.jpg"
+ },
+ {
+  "id": "MN-011",
+  "prenom": "Rania",
+  "initiale": "V.",
+  "ville": "Mississauga",
+  "province": "ON",
+  "taille_cm": 166,
+  "confection": 38,
+  "pointure": 36,
+  "cheveux": "Blonds",
+  "yeux": "Bruns",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "AR"
+  ],
+  "experience": "Confirmee",
+  "disponible": false,
+  "photo": "mannequins/MN-011.jpg"
+ },
+ {
+  "id": "MN-012",
+  "prenom": "Juliette",
+  "initiale": "G.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 160,
+  "confection": 40,
+  "pointure": 40,
+  "cheveux": "Noirs",
+  "yeux": "Bruns",
+  "categories": [
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-012.jpg"
+ },
+ {
+  "id": "MN-013",
+  "prenom": "Sofia",
+  "initiale": "A.",
+  "ville": "Quebec",
+  "province": "QC",
+  "taille_cm": 179,
+  "confection": 36,
+  "pointure": 41,
+  "cheveux": "Chatains",
+  "yeux": "Bruns",
+  "categories": [
+   "Defile"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-013.jpg"
+ },
+ {
+  "id": "MN-014",
+  "prenom": "Clara",
+  "initiale": "F.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 160,
+  "confection": 40,
+  "pointure": 37,
+  "cheveux": "Noirs",
+  "yeux": "Noisette",
+  "categories": [
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-014.jpg"
+ },
+ {
+  "id": "MN-015",
+  "prenom": "Nadia",
+  "initiale": "L.",
+  "ville": "Longueuil",
+  "province": "QC",
+  "taille_cm": 176,
+  "confection": 34,
+  "pointure": 40,
+  "cheveux": "Noirs",
+  "yeux": "Bruns",
+  "categories": [
+   "Defile",
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": false,
+  "photo": "mannequins/MN-015.jpg"
+ },
+ {
+  "id": "MN-016",
+  "prenom": "Emma",
+  "initiale": "D.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 167,
+  "confection": 42,
+  "pointure": 36,
+  "cheveux": "Roux",
+  "yeux": "Gris",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-016.jpg"
+ },
+ {
+  "id": "MN-017",
+  "prenom": "Anais",
+  "initiale": "C.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 163,
+  "confection": 34,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Bruns",
+  "categories": [
+   "Commercial",
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "IT"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-017.jpg"
+ },
+ {
+  "id": "MN-018",
+  "prenom": "Lina",
+  "initiale": "H.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 166,
+  "confection": 42,
+  "pointure": 39,
+  "cheveux": "Colores",
+  "yeux": "Gris",
+  "categories": [
+   "Evenementiel",
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-018.jpg"
+ },
+ {
+  "id": "MN-019",
+  "prenom": "Rosalie",
+  "initiale": "O.",
+  "ville": "Gatineau",
+  "province": "QC",
+  "taille_cm": 168,
+  "confection": 40,
+  "pointure": 39,
+  "cheveux": "Bruns",
+  "yeux": "Bleus",
+  "categories": [
+   "Evenementiel",
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": false,
+  "photo": "mannequins/MN-019.jpg"
+ },
+ {
+  "id": "MN-020",
+  "prenom": "Manon",
+  "initiale": "B.",
+  "ville": "Laval",
+  "province": "QC",
+  "taille_cm": 173,
+  "confection": 38,
+  "pointure": 40,
+  "cheveux": "Colores",
+  "yeux": "Bruns",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-020.jpg"
+ },
+ {
+  "id": "MN-021",
+  "prenom": "Kenza",
+  "initiale": "O.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 168,
+  "confection": 42,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Bruns",
+  "categories": [
+   "Evenementiel",
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-021.jpg"
+ },
+ {
+  "id": "MN-022",
+  "prenom": "Alice",
+  "initiale": "W.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 172,
+  "confection": 32,
+  "pointure": 36,
+  "cheveux": "Bruns",
+  "yeux": "Bleus",
+  "categories": [
+   "Editorial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": false,
+  "photo": "mannequins/MN-022.jpg"
+ },
+ {
+  "id": "MN-023",
+  "prenom": "Florence",
+  "initiale": "B.",
+  "ville": "Laval",
+  "province": "QC",
+  "taille_cm": 182,
+  "confection": 36,
+  "pointure": 37,
+  "cheveux": "Bruns",
+  "yeux": "Verts",
+  "categories": [
+   "Defile"
+  ],
+  "langues": [
+   "FR",
+   "AR"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-023.jpg"
+ },
+ {
+  "id": "MN-024",
+  "prenom": "Imane",
+  "initiale": "G.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 173,
+  "confection": 52,
+  "pointure": 40,
+  "cheveux": "Bruns",
+  "yeux": "Noisette",
+  "categories": [
+   "Grande taille"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-024.jpg"
+ },
+ {
+  "id": "MN-025",
+  "prenom": "Marion",
+  "initiale": "B.",
+  "ville": "Mississauga",
+  "province": "ON",
+  "taille_cm": 165,
+  "confection": 42,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Bruns",
+  "categories": [
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-025.jpg"
+ },
+ {
+  "id": "MN-026",
+  "prenom": "Chloe",
+  "initiale": "L.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 179,
+  "confection": 44,
+  "pointure": 38,
+  "cheveux": "Colores",
+  "yeux": "Noisette",
+  "categories": [
+   "Grande taille"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-026.jpg"
+ },
+ {
+  "id": "MN-027",
+  "prenom": "Selma",
+  "initiale": "X.",
+  "ville": "Mississauga",
+  "province": "ON",
+  "taille_cm": 180,
+  "confection": 36,
+  "pointure": 41,
+  "cheveux": "Chatains",
+  "yeux": "Verts",
+  "categories": [
+   "Editorial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-027.jpg"
+ },
+ {
+  "id": "MN-028",
+  "prenom": "Beatrice",
+  "initiale": "Z.",
+  "ville": "Ottawa",
+  "province": "ON",
+  "taille_cm": 165,
+  "confection": 40,
+  "pointure": 37,
+  "cheveux": "Bruns",
+  "yeux": "Verts",
+  "categories": [
+   "Beaute",
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-028.jpg"
+ },
+ {
+  "id": "MN-029",
+  "prenom": "Naima",
+  "initiale": "C.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 174,
+  "confection": 36,
+  "pointure": 37,
+  "cheveux": "Noirs",
+  "yeux": "Bleus",
+  "categories": [
+   "Editorial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-029.jpg"
+ },
+ {
+  "id": "MN-030",
+  "prenom": "Justine",
+  "initiale": "S.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 172,
+  "confection": 34,
+  "pointure": 37,
+  "cheveux": "Noirs",
+  "yeux": "Verts",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-030.jpg"
+ },
+ {
+  "id": "MN-031",
+  "prenom": "Dounia",
+  "initiale": "R.",
+  "ville": "Quebec",
+  "province": "QC",
+  "taille_cm": 176,
+  "confection": 32,
+  "pointure": 39,
+  "cheveux": "Chatains",
+  "yeux": "Bleus",
+  "categories": [
+   "Defile"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "ES"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-031.jpg"
+ },
+ {
+  "id": "MN-032",
+  "prenom": "Victoria",
+  "initiale": "N.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 177,
+  "confection": 34,
+  "pointure": 36,
+  "cheveux": "Bruns",
+  "yeux": "Bruns",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR"
+  ],
+  "experience": "Professionnelle",
+  "disponible": false,
+  "photo": "mannequins/MN-032.jpg"
+ },
+ {
+  "id": "MN-033",
+  "prenom": "Salma",
+  "initiale": "J.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 163,
+  "confection": 36,
+  "pointure": 37,
+  "cheveux": "Blonds",
+  "yeux": "Noisette",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-033.jpg"
+ },
+ {
+  "id": "MN-034",
+  "prenom": "Gabrielle",
+  "initiale": "D.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 168,
+  "confection": 38,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Gris",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": false,
+  "photo": "mannequins/MN-034.jpg"
+ },
+ {
+  "id": "MN-035",
+  "prenom": "Lydia",
+  "initiale": "F.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 178,
+  "confection": 34,
+  "pointure": 36,
+  "cheveux": "Bruns",
+  "yeux": "Noisette",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-035.jpg"
+ },
+ {
+  "id": "MN-036",
+  "prenom": "Eve",
+  "initiale": "M.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 172,
+  "confection": 50,
+  "pointure": 39,
+  "cheveux": "Chatains",
+  "yeux": "Bruns",
+  "categories": [
+   "Grande taille"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-036.jpg"
+ },
+ {
+  "id": "MN-037",
+  "prenom": "Meriem",
+  "initiale": "Q.",
+  "ville": "Ottawa",
+  "province": "ON",
+  "taille_cm": 170,
+  "confection": 42,
+  "pointure": 37,
+  "cheveux": "Noirs",
+  "yeux": "Bruns",
+  "categories": [
+   "Commercial",
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": false,
+  "photo": "mannequins/MN-037.jpg"
+ },
+ {
+  "id": "MN-038",
+  "prenom": "Coralie",
+  "initiale": "W.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 172,
+  "confection": 34,
+  "pointure": 37,
+  "cheveux": "Noirs",
+  "yeux": "Noisette",
+  "categories": [
+   "Evenementiel",
+   "Editorial"
+  ],
+  "langues": [
+   "FR"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-038.jpg"
+ },
+ {
+  "id": "MN-039",
+  "prenom": "Assia",
+  "initiale": "A.",
+  "ville": "Longueuil",
+  "province": "QC",
+  "taille_cm": 174,
+  "confection": 42,
+  "pointure": 41,
+  "cheveux": "Bruns",
+  "yeux": "Bleus",
+  "categories": [
+   "Beaute"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-039.jpg"
+ },
+ {
+  "id": "MN-040",
+  "prenom": "Sandrine",
+  "initiale": "H.",
+  "ville": "Laval",
+  "province": "QC",
+  "taille_cm": 166,
+  "confection": 34,
+  "pointure": 40,
+  "cheveux": "Bruns",
+  "yeux": "Bruns",
+  "categories": [
+   "Beaute",
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "ES",
+   "IT"
+  ],
+  "experience": "Professionnelle",
+  "disponible": false,
+  "photo": "mannequins/MN-040.jpg"
+ },
+ {
+  "id": "MN-041",
+  "prenom": "Hana",
+  "initiale": "B.",
+  "ville": "Ottawa",
+  "province": "ON",
+  "taille_cm": 163,
+  "confection": 40,
+  "pointure": 41,
+  "cheveux": "Noirs",
+  "yeux": "Bruns",
+  "categories": [
+   "Commercial",
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "AR",
+   "IT"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-041.jpg"
+ },
+ {
+  "id": "MN-042",
+  "prenom": "Marilou",
+  "initiale": "G.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 171,
+  "confection": 34,
+  "pointure": 41,
+  "cheveux": "Chatains",
+  "yeux": "Bruns",
+  "categories": [
+   "Evenementiel",
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-042.jpg"
+ },
+ {
+  "id": "MN-043",
+  "prenom": "Nour",
+  "initiale": "R.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 178,
+  "confection": 38,
+  "pointure": 39,
+  "cheveux": "Noirs",
+  "yeux": "Bruns",
+  "categories": [
+   "Evenementiel",
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "AR"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-043.jpg"
+ },
+ {
+  "id": "MN-044",
+  "prenom": "Ophelie",
+  "initiale": "J.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 169,
+  "confection": 38,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Verts",
+  "categories": [
+   "Evenementiel"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Debutante",
+  "disponible": true,
+  "photo": "mannequins/MN-044.jpg"
+ },
+ {
+  "id": "MN-045",
+  "prenom": "Samira",
+  "initiale": "B.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 173,
+  "confection": 48,
+  "pointure": 37,
+  "cheveux": "Chatains",
+  "yeux": "Noisette",
+  "categories": [
+   "Grande taille"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-045.jpg"
+ },
+ {
+  "id": "MN-046",
+  "prenom": "Delphine",
+  "initiale": "X.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 178,
+  "confection": 36,
+  "pointure": 41,
+  "cheveux": "Noirs",
+  "yeux": "Noisette",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR"
+  ],
+  "experience": "Confirmee",
+  "disponible": true,
+  "photo": "mannequins/MN-046.jpg"
+ },
+ {
+  "id": "MN-047",
+  "prenom": "Leila",
+  "initiale": "H.",
+  "ville": "Toronto",
+  "province": "ON",
+  "taille_cm": 177,
+  "confection": 42,
+  "pointure": 39,
+  "cheveux": "Colores",
+  "yeux": "Bleus",
+  "categories": [
+   "Commercial"
+  ],
+  "langues": [
+   "FR",
+   "EN",
+   "ES"
+  ],
+  "experience": "Debutante",
+  "disponible": false,
+  "photo": "mannequins/MN-047.jpg"
+ },
+ {
+  "id": "MN-048",
+  "prenom": "Audrey",
+  "initiale": "W.",
+  "ville": "Montreal",
+  "province": "QC",
+  "taille_cm": 179,
+  "confection": 34,
+  "pointure": 38,
+  "cheveux": "Bruns",
+  "yeux": "Noisette",
+  "categories": [
+   "Defile",
+   "Editorial"
+  ],
+  "langues": [
+   "FR",
+   "EN"
+  ],
+  "experience": "Professionnelle",
+  "disponible": true,
+  "photo": "mannequins/MN-048.jpg"
+ }
+]

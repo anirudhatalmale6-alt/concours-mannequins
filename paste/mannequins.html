@@ -1,0 +1,366 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+.cms{--ink:#1c1a24;--mut:#8b8698;--line:#ececf1;--soft:#faf9fc;--tint:#f2f0f6;
+ --acc:#1b1922;--deep:#2b2833;--sph1:#f3f1f5;--sph2:#c9c6d0;--sph3:#6f6b7a;
+ font-family:Poppins,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+ color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
+.cms *,.cms *::before,.cms *::after{box-sizing:border-box}
+.cms img{max-width:100%;height:auto;display:block}
+.cms a{color:inherit}
+
+/* Bandes. Une seule bande sombre par page : au-dela, le charbon cesse
+   d'etre un accent et devient le fond. */
+.cms-s{padding:74px 0;background:#fff}
+.cms-s.soft{background:var(--soft)}
+.cms-s.tint{background:var(--tint);border-block:1px solid #e6e3ee}
+.cms-s.ink{background:var(--acc);color:#fff}
+.cms-s.ink h2,.cms-s.ink h3{color:#fff}
+.cms-s.ink p,.cms-s.ink li,.cms-s.ink .cms-sub{color:#c9c6d0}
+.cms-s.ink .cms-eb{color:#a5a1b0}
+.cms-w{max-width:1120px;margin:0 auto;padding:0 22px}
+
+.cms-eb{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--sph3);font-weight:600;margin:0 0 10px}
+.cms h1,.cms h2,.cms h3{margin:0 0 14px;font-weight:600;letter-spacing:-.015em;
+ color:var(--ink);line-height:1.2}
+.cms h1{font-size:44px}
+.cms h2{font-size:31px}
+.cms h3{font-size:17px;margin-bottom:8px}
+.cms p{margin:0 0 14px}
+.cms-sub{font-size:18px;color:#4a4753;max-width:64ch}
+
+/* Le filet a quatre segments : les quatre tons de la sphere, dans l'ordre.
+   Le premier ton de la sphere (#f3f1f5) est invisible sur blanc — on part
+   donc du deuxieme cran, sinon le filet parait casse a gauche. */
+.cms-rail{display:flex;gap:0;height:3px;width:132px;margin:0 0 26px;
+ border-radius:2px;overflow:hidden}
+.cms-rail i{flex:1}
+.cms-rail i:nth-child(1){background:#dcd9e4}
+.cms-rail i:nth-child(2){background:var(--sph2)}
+.cms-rail i:nth-child(3){background:var(--sph3)}
+.cms-rail i:nth-child(4){background:var(--deep)}
+
+/* Sphere du logo, en CSS : nette a toutes les tailles, contrairement au GIF. */
+.cms-sph{width:46px;height:46px;border-radius:50%;flex:0 0 46px;
+ background:radial-gradient(circle at 34% 30%,var(--sph1) 0%,var(--sph2) 34%,
+ var(--sph3) 72%,var(--deep) 100%);
+ box-shadow:inset -5px -7px 14px rgba(0,0,0,.28),0 4px 12px rgba(27,25,34,.18)}
+.cms-brand{display:flex;align-items:center;gap:13px;margin-bottom:26px}
+.cms-brand b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.cms-brand .tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+ background:var(--acc);color:#fff;padding:4px 9px;border-radius:3px;
+ font-weight:600}
+.cms-s.ink .cms-brand .tag{background:#fff;color:var(--acc)}
+
+/* Le bouton doit etre ecrit « a.cms-btn » et pas « .cms-btn » : la regle
+   generique .cms a{color:inherit} porte une classe ET un element, donc elle
+   bat une simple classe. Ecrit .cms-btn seul, le libelle blanc retombait sur
+   l'encre heritee — bouton charbon, texte charbon, libelle invisible. */
+.cms a.cms-btn,.cms button.cms-btn{display:inline-block;background:var(--acc);
+ color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+ padding:14px 26px;border-radius:6px;border:1px solid var(--acc);
+ cursor:pointer;font-family:inherit;line-height:1.4}
+.cms a.cms-btn.ghost,.cms button.cms-btn.ghost{background:transparent;
+ color:var(--ink);border-color:#d8d5e0}
+.cms-s.ink a.cms-btn,.cms-s.ink button.cms-btn{background:#fff;
+ color:var(--acc);border-color:#fff}
+.cms-s.ink a.cms-btn.ghost,.cms-s.ink button.cms-btn.ghost{
+ background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* Grilles */
+.cms-g{display:grid;gap:18px}
+.cms-g.c2{grid-template-columns:repeat(2,1fr)}
+.cms-g.c3{grid-template-columns:repeat(3,1fr)}
+.cms-g.c4{grid-template-columns:repeat(4,1fr)}
+.cms-card{background:#fff;border:1px solid var(--line);border-radius:10px;
+ padding:22px}
+.cms-s.soft .cms-card,.cms-s.tint .cms-card{background:#fff}
+.cms-s.ink .cms-card{background:#241f2d;border-color:rgba(255,255,255,.14)}
+.cms-card p{font-size:14.8px;color:#4a4753;margin:0}
+.cms-s.ink .cms-card p{color:#d6d3de}
+
+/* Etapes numerotees */
+.cms-steps{list-style:none;margin:0;padding:0;counter-reset:e}
+.cms-steps li{counter-increment:e;display:grid;grid-template-columns:44px 1fr;
+ gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.cms-steps li:first-child{border-top:0}
+.cms-steps li::before{content:counter(e,decimal-leading-zero);
+ font-size:14px;font-weight:600;color:var(--sph3);padding-top:2px}
+.cms-steps p{font-size:14.6px;color:#4a4753;margin:0}
+
+/* Tableau de criteres */
+.cms-tab{width:100%;border-collapse:collapse;font-size:14.8px}
+.cms-tab th,.cms-tab td{text-align:left;padding:13px 14px;
+ border-bottom:1px solid var(--line);vertical-align:top}
+.cms-tab th{width:180px;font-weight:600;color:var(--ink)}
+.cms-tab td{color:#4a4753}
+
+/* Emplacements d'images : le cadre a le ratio final, pose des maintenant.
+   Sans lui, la page saute de 300 px le jour ou les photos arrivent. */
+.cms-fig{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.cms-fig .ph{aspect-ratio:3/4;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;padding:18px;
+ background:radial-gradient(120% 120% at 30% 20%,#f6f5f9 0%,#e9e7ef 55%,
+ #dcd9e4 100%)}
+.cms-fig .ph b{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--sph3);margin-bottom:6px}
+.cms-fig .ph span{font-size:12.5px;color:var(--mut);line-height:1.5;
+ word-break:break-all}
+.cms-fig figcaption{font-size:12.5px;color:var(--mut);padding:10px 12px;
+ background:var(--soft)}
+
+/* Catalogue mannequins */
+.cms-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;
+ padding:18px;background:#fff;border:1px solid var(--line);border-radius:10px;
+ margin-bottom:20px;position:sticky;top:0;z-index:5}
+.cms-f{display:flex;flex-direction:column;gap:5px}
+.cms-f label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+ color:var(--sph3);font-weight:600}
+.cms-f select,.cms-f input{font:inherit;font-size:14px;padding:9px 11px;
+ border:1px solid #d8d5e0;border-radius:6px;background:#fff;color:var(--ink);
+ min-width:132px}
+.cms-count{margin-left:auto;font-size:14px;color:var(--mut);padding-bottom:9px}
+.cms-count b{color:var(--ink)}
+
+.cms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cms-mn{border:1px solid var(--line);border-radius:10px;overflow:hidden;
+ background:#fff}
+.cms-mn .cms-fig{border:0;border-radius:0}
+.cms-mn .bd{padding:14px 15px 16px}
+.cms-mn .nm{display:flex;align-items:baseline;justify-content:space-between;
+ gap:8px;margin-bottom:2px}
+.cms-mn .nm b{font-size:16px;font-weight:600}
+.cms-mn .nm i{font-style:normal;font-size:11.5px;color:var(--mut)}
+.cms-mn .loc{font-size:13px;color:var(--mut);margin-bottom:10px}
+.cms-mn dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;
+ font-size:13px}
+.cms-mn dt{color:var(--mut)}
+.cms-mn dd{margin:0;color:#4a4753}
+.cms-mn .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.cms-mn .tags span{font-size:11px;letter-spacing:.04em;background:var(--tint);
+ color:#4a4753;padding:4px 9px;border-radius:20px}
+.cms-mn .dispo{font-size:11.5px;font-weight:600;padding:3px 9px;
+ border-radius:20px;background:#eaf6ee;color:#1f7a45}
+.cms-mn .dispo.non{background:#f3f1f5;color:var(--mut)}
+.cms-vide{padding:44px 20px;text-align:center;color:var(--mut);
+ border:1px dashed #d8d5e0;border-radius:10px;font-size:15px}
+
+/* Formulaire de candidature */
+.cms-form{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.cms-form .full{grid-column:1/-1}
+.cms-form label{display:block;font-size:12px;letter-spacing:.1em;
+ text-transform:uppercase;color:var(--sph3);font-weight:600;margin-bottom:6px}
+.cms-form input,.cms-form select,.cms-form textarea{width:100%;font:inherit;
+ font-size:15px;padding:12px 13px;border:1px solid #d8d5e0;border-radius:6px;
+ background:#fff}
+.cms-form textarea{min-height:112px;resize:vertical}
+.cms-cons{grid-column:1/-1;display:flex;gap:11px;align-items:flex-start;
+ background:var(--soft);border:1px solid var(--line);border-radius:8px;
+ padding:15px}
+.cms-cons input{width:17px;height:17px;margin-top:3px;flex:0 0 17px}
+.cms-cons span{font-size:13.6px;color:#4a4753;line-height:1.55}
+
+.cms-note{font-size:13.4px;color:var(--mut);border-left:2px solid var(--sph2);
+ padding-left:14px;margin-top:18px}
+.cms-s.ink .cms-note{border-left-color:var(--sph3);color:#a5a1b0}
+
+.cms-faq{border-top:1px solid var(--line)}
+.cms-faq details{border-bottom:1px solid var(--line)}
+.cms-faq summary{cursor:pointer;padding:17px 0;font-weight:600;font-size:16px;
+ list-style:none}
+.cms-faq summary::-webkit-details-marker{display:none}
+.cms-faq summary::after{content:"+";float:right;color:var(--mut);
+ font-weight:400;font-size:20px;line-height:1}
+.cms-faq details[open] summary::after{content:"\2212"}
+.cms-faq .a{padding:0 40px 18px 0;font-size:15px;color:#4a4753}
+
+.cms-nav{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;
+ padding:16px 0;border-top:1px solid var(--line);
+ border-bottom:1px solid var(--line);margin-bottom:0}
+.cms-nav a{color:#4a4753;text-decoration:none}
+.cms-nav a:hover{color:var(--ink);text-decoration:underline}
+
+@media (max-width:960px){
+ .cms-grid{grid-template-columns:repeat(3,1fr)}
+ .cms-g.c4{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+ .cms h1{font-size:32px}
+ .cms h2{font-size:25px}
+ .cms-s{padding:52px 0}
+ .cms-g.c2,.cms-g.c3,.cms-g.c4{grid-template-columns:1fr}
+ .cms-grid{grid-template-columns:repeat(2,1fr)}
+ .cms-form{grid-template-columns:1fr}
+ .cms-bar{position:static}
+ .cms-tab th{width:auto;display:block;padding-bottom:2px;border-bottom:0}
+ .cms-tab td{display:block;padding-top:0}
+}
+@media (max-width:460px){
+ .cms-grid{grid-template-columns:1fr}
+}
+</style>
+<div class="cms">
+<section class="cms-s"><div class="cms-w">
+<div class="cms-brand"><div class="cms-sph"></div><b>Catalogue</b><span class="tag">Mannequins</span></div>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<h1>Le catalogue mannequin feminin</h1>
+<div class="cms-g c2" style="gap:44px;align-items:center">
+<div>
+<p class="cms-sub">48 profils, 8 villes, 6 categories, de 160 a 182 cm. Filtrez, puis demandez le book complet des profils qui vous interessent.</p>
+<p style="margin-top:18px"><a class="cms-btn" href="#cms-grid">Parcourir le catalogue</a> <a class="cms-btn ghost" href="#candidature-mannequin">Deposer mon book</a></p>
+</div>
+<figure class="cms-fig" data-img="images/mannequins-studio.jpg" data-ratio="16/9"><div class="ph"><b>Image a deposer</b><span>images/mannequins-studio.jpg</span></div></figure>
+</div>
+</div></section>
+<section class="cms-s soft"><div class="cms-w">
+<div class="cms-bar">
+<div class="cms-f"><label for="f-cat">Categorie</label><select id="f-cat"><option value="">Toutes</option><option>Beaute</option><option>Commercial</option><option>Defile</option><option>Editorial</option><option>Evenementiel</option><option>Grande taille</option></select></div>
+<div class="cms-f"><label for="f-ville">Ville</label><select id="f-ville"><option value="">Toutes</option><option>Gatineau</option><option>Laval</option><option>Longueuil</option><option>Mississauga</option><option>Montreal</option><option>Ottawa</option><option>Quebec</option><option>Toronto</option></select></div>
+<div class="cms-f"><label for="f-taille">Taille mini (cm)</label><select id="f-taille"><option value="">Sans minimum</option><option value="160">160 cm et plus</option><option value="162">162 cm et plus</option><option value="164">164 cm et plus</option><option value="166">166 cm et plus</option><option value="168">168 cm et plus</option><option value="170">170 cm et plus</option><option value="172">172 cm et plus</option><option value="174">174 cm et plus</option><option value="176">176 cm et plus</option><option value="178">178 cm et plus</option><option value="180">180 cm et plus</option></select></div>
+<div class="cms-f"><label for="f-exp">Experience</label><select id="f-exp"><option value="">Toutes</option><option>Debutante</option><option>Confirmee</option><option>Professionnelle</option></select></div>
+<div class="cms-f"><label for="f-lg">Langue</label><select id="f-lg"><option value="">Toutes</option><option>FR</option><option>EN</option><option>AR</option><option>ES</option><option>IT</option></select></div>
+<div class="cms-f"><label for="f-dispo">Disponibilite</label><select id="f-dispo"><option value="">Tous</option><option value="1">Disponibles</option></select></div>
+<div class="cms-count" id="cms-count"></div>
+</div>
+<div class="cms-grid" id="cms-grid"></div>
+<div class="cms-vide" id="cms-vide" style="display:none">Aucun profil ne correspond a ces filtres. Elargissez un critere.</div>
+<p class="cms-note" style="margin-top:24px"><b>Fiches de demonstration.</b> Les 48 profils ci-dessus sont inventes et servent a montrer la mise en page et les filtres. Ils sont a remplacer par les mannequins sous contrat, une ligne par fiche dans le fichier de donnees.</p>
+</div></section>
+<section class="cms-s ink"><div class="cms-w">
+<p class="cms-eb">Ce que la fiche publique affiche, et ce qu'elle garde</p>
+<h2>Le book complet ne s'affiche pas en acces libre</h2>
+<div class="cms-g c3" style="margin-top:24px">
+<div class="cms-card"><h3>En public</h3><p>Prenom et initiale, ville, taille, categories, langues, disponibilite. De quoi faire une presalection serieuse.</p></div>
+<div class="cms-card"><h3>Sur demande</h3><p>Nom complet, mensurations completes, book integral, video de presentation, tarifs. Transmis au client identifie, pour un projet nomme.</p></div>
+<div class="cms-card"><h3>Pourquoi</h3><p>Une page publique qui donne nom complet, ville, mensurations et disponibilite de jeunes femmes est un annuaire pour n'importe qui. Ce n'est pas de la pudeur, c'est de la securite — et les agences serieuses fonctionnent toutes comme ca.</p></div>
+</div>
+</div></section>
+<section class="cms-s"><div class="cms-w">
+<div class="cms-g c2" style="gap:44px;align-items:center">
+<div>
+<p class="cms-eb">Rejoindre le catalogue</p>
+<h2>Le catalogue grandit par candidature, pas par recopiage</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<p>Chaque fiche appartient a une personne qui a signe. C'est la seule facon de batir un catalogue qui tient : une photo reprise ailleurs, c'est le book d'une autre agence et le droit a l'image de quelqu'un qui n'a rien accepte.</p>
+<p><a class="cms-btn" href="#candidature-mannequin">Deposer mon book</a></p>
+</div>
+<figure class="cms-fig" data-img="images/mannequins-book.jpg" data-ratio="3/4"><div class="ph"><b>Image a deposer</b><span>images/mannequins-book.jpg</span></div></figure>
+</div></div></section>
+<section class="cms-s tint" id="candidature-mannequin"><div class="cms-w">
+<p class="cms-eb">Candidature mannequin</p>
+<h2>Deposer son book</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<form class="cms-form" style="margin-top:22px" method="post" action="#" onsubmit="return false">
+<div><label for="m-prenom">Prenom</label><input id="m-prenom" name="prenom" type="text" required></div>
+<div><label for="m-nom">Nom</label><input id="m-nom" name="nom" type="text" required></div>
+<div><label for="m-ville">Ville</label><input id="m-ville" name="ville" type="text" required></div>
+<div><label for="m-taille">Taille (cm)</label><input id="m-taille" name="taille" type="number" required></div>
+<div><label for="m-tel">Telephone</label><input id="m-tel" name="tel" type="tel" required></div>
+<div><label for="m-naissance">Date de naissance</label><input id="m-naissance" name="naissance" type="date" required></div>
+<div class="full"><label for="m-cat">Categories visees</label><select id="m-cat" name="categories" multiple size="4"><option>Beaute</option><option>Commercial</option><option>Defile</option><option>Editorial</option><option>Evenementiel</option><option>Grande taille</option></select></div>
+<div class="full"><label for="m-book">Photos (visage, en pied, profil)</label><input id="m-book" name="book" type="file" accept="image/*" multiple></div>
+<label class="cms-cons"><input type="checkbox" name="majeure" required><span><b>J'ai 18 ans ou plus.</b> Les candidatures de mineures demandent l'accord ecrit des deux parents et un cadre distinct ; elles ne passent pas par ce formulaire.</span></label>
+<label class="cms-cons"><input type="checkbox" name="droit_image" required><span><b>Droit a l'image.</b> J'autorise la publication de ma fiche <b>prenom, initiale et ville uniquement</b>. Mon nom complet et mon book ne sont transmis qu'a un client identifie, pour un projet nomme, et je peux retirer ma fiche a tout moment.</span></label>
+<div class="full"><button class="cms-btn" type="submit">Envoyer mon book</button></div>
+</form>
+<p class="cms-note"><b>Ce formulaire n'envoie encore rien</b> — il attend l'adresse de reception et l'entite juridique, comme celui du concours.</p>
+</div></section>
+</div>
+<script>
+/* Remplace chaque cadre par la vraie image des qu'elle existe. On teste le
+   chargement AVANT de toucher au DOM : si le fichier manque, le cadre nomme
+   reste en place au lieu d'une icone d'image cassee. */
+window.cmsImages=function(){
+ var f=document.querySelectorAll('.cms-fig[data-img]');
+ for(var i=0;i<f.length;i++){(function(fig){
+  var src=fig.getAttribute('data-img'),im=new Image();
+  im.onload=function(){
+   var box=fig.querySelector('.ph');if(!box)return;
+   im.style.width='100%';im.style.display='block';
+   im.style.aspectRatio=fig.getAttribute('data-ratio')||'3/4';
+   im.style.objectFit='cover';im.alt='';
+   box.parentNode.replaceChild(im,box);
+  };
+  im.src=src;
+ })(f[i]);}
+};window.cmsImages();
+
+/* Le catalogue lit ses fiches dans catalogue.json : le HTML ne contient
+   aucune fiche en dur. Ajouter un mannequin = une ligne de donnees, pas une
+   ligne de page. */
+(function(){
+ var grid=document.getElementById('cms-grid');
+ if(!grid)return;
+ var vide=document.getElementById('cms-vide'),cnt=document.getElementById('cms-count');
+ var F=[];
+ var sel={cat:'f-cat',ville:'f-ville',taille:'f-taille',exp:'f-exp',
+          lg:'f-lg',dispo:'f-dispo'},el={};
+ for(var k in sel)el[k]=document.getElementById(sel[k]);
+
+ function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+ function carte(m){
+  return '<article class="cms-mn">'
+   +'<figure class="cms-fig" data-img="'+esc(m.photo)+'" data-ratio="3/4">'
+   +'<div class="ph"><b>Photo a deposer</b><span>'+esc(m.photo)+'</span></div>'
+   +'</figure><div class="bd">'
+   +'<div class="nm"><b>'+esc(m.prenom)+' '+esc(m.initiale)+'</b>'
+   +'<span class="dispo'+(m.disponible?'':' non')+'">'
+   +(m.disponible?'Disponible':'En mission')+'</span></div>'
+   +'<div class="loc">'+esc(m.ville)+' &middot; '+esc(m.province)
+   +' &middot; '+esc(m.id)+'</div>'
+   +'<dl><dt>Taille</dt><dd>'+esc(m.taille_cm)+' cm</dd>'
+   +'<dt>Confection</dt><dd>'+esc(m.confection)+'</dd>'
+   +'<dt>Cheveux</dt><dd>'+esc(m.cheveux)+'</dd>'
+   +'<dt>Yeux</dt><dd>'+esc(m.yeux)+'</dd>'
+   +'<dt>Langues</dt><dd>'+m.langues.map(esc).join(', ')+'</dd>'
+   +'<dt>Profil</dt><dd>'+esc(m.experience)+'</dd></dl>'
+   +'<div class="tags">'+m.categories.map(function(c){
+     return '<span>'+esc(c)+'</span>';}).join('')+'</div>'
+   +'</div></article>';
+ }
+
+ function garde(m){
+  if(el.cat.value && m.categories.indexOf(el.cat.value)<0)return false;
+  if(el.ville.value && m.ville!==el.ville.value)return false;
+  if(el.taille.value && m.taille_cm<parseInt(el.taille.value,10))return false;
+  if(el.exp.value && m.experience!==el.exp.value)return false;
+  if(el.lg.value && m.langues.indexOf(el.lg.value)<0)return false;
+  if(el.dispo.value==='1' && !m.disponible)return false;
+  return true;
+ }
+
+ function rendre(){
+  var v=F.filter(garde);
+  grid.innerHTML=v.map(carte).join('');
+  vide.style.display=v.length?'none':'block';
+  /* On annonce le sous-ensemble ET le total : « 12 profils » tout court
+     laisse croire que le catalogue en compte 12. */
+  cnt.innerHTML='<b>'+v.length+'</b> profil'+(v.length>1?'s':'')
+   +' sur '+F.length;
+  if(window.cmsImages)window.cmsImages();
+ }
+
+ for(var k2 in el)el[k2].addEventListener('change',rendre);
+
+ var x=new XMLHttpRequest();
+ x.open('GET','catalogue.json',true);
+ x.onload=function(){
+  if(x.status<200||x.status>=300){
+   /* Le catalogue n'a pas ete lu : on le DIT. Une grille vide qui se tait
+      ressemble a un catalogue vide, et c'est un mensonge different. */
+   vide.textContent='Le catalogue n\'a pas pu etre charge (HTTP '
+    +x.status+'). Les fiches sont dans catalogue.json, a cote de cette page.';
+   vide.style.display='block';cnt.textContent='';return;
+  }
+  F=JSON.parse(x.responseText);rendre();
+ };
+ x.onerror=function(){
+  vide.textContent='Le catalogue n\'a pas pu etre charge. Verifiez que '
+   +'catalogue.json est bien depose a cote de cette page.';
+  vide.style.display='block';
+ };
+ x.send();
+})();
+</script>
