@@ -168,6 +168,26 @@
  padding-left:14px;margin-top:18px}
 .cms-s.ink .cms-note{border-left-color:var(--sph3);color:#a5a1b0}
 
+/* Ce qui reste a trancher — un tarif, une date, un nom. Cadre pointille et
+   pas de rouge invente : la palette n'a pas de couleur, et un tarif absent
+   qui ressemble au texte courant finit par etre lu comme un prix. */
+.cms-tbc{display:inline-block;font-weight:600;font-size:13px;
+ padding:2px 9px;border:1px dashed var(--sph3);border-radius:5px;
+ background:var(--sph1);color:var(--acc);letter-spacing:.02em}
+.cms-s.ink .cms-tbc{background:transparent;border-color:var(--sph3);color:#fff}
+
+/* Fiche prestation : la carte porte un pied fige en bas, pour que les
+   tarifs s'alignent d'une colonne a l'autre au lieu de flotter au gre de la
+   longueur du texte. */
+.cms-pres{display:flex;flex-direction:column;height:100%}
+.cms-pres .meta{font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+ color:var(--mut);margin:0 0 6px}
+.cms-pres ul{margin:12px 0 0;padding-left:18px}
+.cms-pres li{font-size:14.2px;color:#4a4753;margin-bottom:5px}
+.cms-pres .liv{font-size:13.8px;color:#4a4753;margin:14px 0 0;
+ padding-top:12px;border-top:1px solid var(--line)}
+.cms-pres .pied{margin-top:auto;padding-top:14px}
+
 .cms-faq{border-top:1px solid var(--line)}
 .cms-faq details{border-bottom:1px solid var(--line)}
 .cms-faq summary{cursor:pointer;padding:17px 0;font-weight:600;font-size:16px;
@@ -211,7 +231,7 @@
 <p class="cms-sub">Candidatures ouvertes aux residentes du Quebec de 18 ans et plus. Inscription gratuite.</p>
 <table class="cms-tab" style="max-width:560px;margin-top:24px"><tr><th>Finale</th><td>[DATE A CONFIRMER]</td></tr><tr><th>Lieu</th><td>[SALLE A CONFIRMER], Montreal</td></tr><tr><th>Candidatures</th><td>Gratuites, en ligne, jusqu'a [DATE A CONFIRMER]</td></tr></table>
 <p style="margin-top:22px"><a class="cms-btn" href="#candidature">Deposer ma candidature</a> <a class="cms-btn ghost" href="#etapes">Voir les etapes</a></p>
-<nav class="cms-nav" style="margin-top:34px"><a href="#etapes">Les etapes</a><a href="#criteres">Qui peut candidater</a><a href="#prix">Ce que gagnent les finalistes</a><a href="#jury">Le jury</a><a href="#candidature">Candidature</a><a href="#faq">Questions</a></nav>
+<nav class="cms-nav" style="margin-top:34px"><a href="#etapes">Les etapes</a><a href="#criteres">Qui peut candidater</a><a href="#prix">Ce que gagnent les finalistes</a><a href="#jury">Le jury</a><a href="#candidature">Candidature</a><a href="#faq">Questions</a><a href="photographie.html">Photographie</a></nav>
 </div></section>
 <section class="cms-s soft"><div class="cms-w">
 <div class="cms-g c2" style="gap:44px;align-items:center">
@@ -221,7 +241,7 @@
 <p>Les dates, les criteres, le jury, la dotation : tout est publie avant l'ouverture des candidatures, pas annonce au fur et a mesure. Une candidate doit savoir a quoi elle s'engage le jour ou elle remplit le formulaire.</p>
 <p>L'inscription est gratuite, sans frais de dossier et sans tenue a acheter. Chaque candidature recoit une reponse, retenue ou non.</p>
 </div>
-<figure class="cms-fig" data-img="images/concours-scene.jpg" data-ratio="16/9"><div class="ph"><b>Image a deposer</b><span>images/concours-scene.jpg</span></div></figure>
+<figure class="cms-fig" data-img="images/concours-scene.jpg" data-ratio="16/9"><div class="ph" style="aspect-ratio:16/9"><b>Image a deposer</b><span>images/concours-scene.jpg</span></div></figure>
 </div></div></section>
 <section class="cms-s" id="etapes"><div class="cms-w">
 <p class="cms-eb">Le parcours</p>
@@ -250,7 +270,7 @@
 </table>
 <p class="cms-note">Ces criteres sont ceux du reglement. Tant que le reglement complet n'est pas en ligne et telechargeable, cette page affiche un lien inactif plutot qu'un lien qui promet un document inexistant.</p>
 </div>
-<figure class="cms-fig" data-img="images/concours-coulisses.jpg" data-ratio="3/4"><div class="ph"><b>Image a deposer</b><span>images/concours-coulisses.jpg</span></div></figure>
+<figure class="cms-fig" data-img="images/concours-coulisses.jpg" data-ratio="3/4"><div class="ph" style="aspect-ratio:3/4"><b>Image a deposer</b><span>images/concours-coulisses.jpg</span></div></figure>
 </div></div></section>
 <section class="cms-s" id="prix"><div class="cms-w">
 <p class="cms-eb">Dotation</p>
@@ -285,7 +305,7 @@
 <div class="cms-card"><h3>[NOM]</h3><p style="font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#a5a1b0;margin-bottom:6px">Presse</p><p>A nommer.</p></div>
 </div>
 <div style="max-width:620px;margin-top:30px">
-<figure class="cms-fig" data-img="images/concours-jury.jpg" data-ratio="16/9"><div class="ph"><b>Image a deposer</b><span>images/concours-jury.jpg</span></div></figure>
+<figure class="cms-fig" data-img="images/concours-jury.jpg" data-ratio="16/9"><div class="ph" style="aspect-ratio:16/9"><b>Image a deposer</b><span>images/concours-jury.jpg</span></div></figure>
 </div>
 </div></section>
 <section class="cms-s soft" id="candidature"><div class="cms-w">

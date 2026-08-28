@@ -1,14 +1,16 @@
-# Concours de miss + catalogue mannequin feminin
+# Concours de miss + catalogue mannequin + service de photographie
 
-Deux pages autonomes. Elles se collent dans un site existant ou se servent
+Trois pages autonomes. Elles se collent dans un site existant ou se servent
 telles quelles.
 
 ```
-docs/concours.html      la page unique du concours (apercu complet)
-docs/mannequins.html    le catalogue mannequin feminin
-docs/catalogue.json     les fiches du catalogue
-paste/concours.html     LE MEME contenu, sans <html>/<head>, a coller dans
-paste/mannequins.html   un widget HTML (Elementor ou autre)
+concours.html        la page unique du concours (apercu complet)
+mannequins.html      le catalogue mannequin feminin
+photographie.html    le service de photographie, 8 prestations
+catalogue.json       les fiches du catalogue
+paste/concours.html      LE MEME contenu, sans <html>/<head>, a coller
+paste/mannequins.html    dans un widget HTML (Elementor ou autre)
+paste/photographie.html
 ```
 
 Pour poser les pages sur un site WordPress : ouvre `paste/concours.html`,
@@ -48,7 +50,7 @@ soiree qui n'existe pas.
 6. L'entite juridique organisatrice, pour les mentions legales.
 7. L'adresse ou arrivent les candidatures.
 
-Tant que 6 et 7 manquent, **les deux formulaires n'envoient rien** et le
+Tant que 6 et 7 manquent, **les trois formulaires n'envoient rien** et le
 disent. C'est deliberé : un formulaire branche avant d'avoir une adresse de
 reception et une entite responsable collecte des noms, des dates de
 naissance et des photos que personne n'est en mesure de traiter.
@@ -114,6 +116,46 @@ attendu**. Deposer le fichier suffit ; il n'y a aucun HTML a modifier.
 
 ---
 
+## Le service de photographie
+
+Page a part, et pas une section du catalogue : les portraits, le
+e-commerce et les photos d'entreprise se vendent a des clients qui ne
+cherchent aucun mannequin. Enterree en bas du catalogue, la prestation ne
+serait jamais trouvee par eux. Les trois pages se renvoient l'une a
+l'autre.
+
+Huit formules : polaroids agence, book de demarrage, book professionnel,
+portrait et casting comedien, e-commerce et packshot, lookbook et campagne,
+couverture d'evenement, video de presentation. Chacune dit ce qu'elle
+contient et ce qu'elle livre.
+
+### Aucun tarif n'est affiche, et c'est deliberé
+
+Chaque formule porte un `TARIF A CONFIRMER` encadre. Un prix de shooting se
+construit sur quatre choses que je ne connais pas : le cout du studio,
+l'equipe (maquillage, stylisme, assistant), le temps de retouche et surtout
+**la cession de droits**. La meme photo ne vaut pas la meme chose en usage
+web interne et en affichage 4x3. Un chiffre pose au hasard serait un
+engagement commercial pris a ta place, et un controle refuse tout symbole
+monetaire sur cette page tant que la grille n'est pas arretee.
+
+A la place, la page explique les **cinq elements qui font le prix** — c'est
+plus honnete qu'un forfait unique, et ca se defend mieux en negociation.
+
+Le formulaire de devis demande **l'usage prevu des photos des la
+demande** : c'est lui qui fixe le prix, et le decouvrir apres oblige a
+refaire le devis.
+
+### Ce qui reste a trancher pour cette page
+
+- Les tarifs des huit prestations, et le bareme de cession de droits.
+- Le studio : loue a l'heure, ou local a soi ?
+- Le ou les photographes, et s'ils sont salaries ou en contrat de cession.
+- Le modele d'autorisation de droit a l'image, a rediger avec l'entite
+  juridique qui facturera les seances.
+
+---
+
 ## Les couleurs
 
 Aucune couleur inventee. Tout sort de la palette deja en ligne sur
@@ -122,19 +164,19 @@ Aucune couleur inventee. Tout sort de la palette deja en ligne sur
 tons de la sphere. Un controle refuse toute couleur hors de cette liste.
 
 Je n'ai pas mis de rose ni de dore « parce que c'est un concours de miss » :
-ca aurait donne deux pages qui n'appartiennent a aucune de tes marques.
+ca aurait donne des pages qui n'appartiennent a aucune de tes marques.
 
 ## Verification
 
 ```
-python3 tests-concours.py     57 controles sur les fichiers generes
-python3 tests-rendu.py        24 controles dans un vrai navigateur
+python3 tests-concours.py     78 controles sur les fichiers generes
+python3 tests-rendu.py        42 controles dans un vrai navigateur
 python3 build.py              regenere les pages
 python3 prompts.py            regenere PROMPTS-IMAGES.md
 python3 shots.py              refait les captures
 ```
 
-**81 controles, tous verts.** Ceux qui portent le plus :
+**120 controles, tous verts.** Ceux qui portent le plus :
 
 - les nombres affiches (48 profils, 8 villes, 6 categories, 160-182 cm) sont
   **compares au catalogue**, pas relus dans la page ;
@@ -144,7 +186,12 @@ python3 shots.py              refait les captures
   « 48 == 48 » passerait aussi bien avec le filtre supprime ;
 - les couleurs et le contraste sont **mesures a l'ecran**, pas lus dans le
   CSS ;
-- aucun nom de concours existant n'apparait dans les deux pages ;
+- aucun nom de concours existant n'apparait dans les trois pages ;
+- **aucun montant ni symbole monetaire** sur la page photo, et un marqueur
+  de tarif par prestation — compte, pas regarde a l'oeil ;
+- chaque cadre d'image porte **le ratio de l'image qu'il attend** : la
+  regle generale posait 3/4 sur tous les cadres, y compris les slots 16/9,
+  et la page sautait le jour ou le fichier arrivait ;
 - chaque case de consentement est bien `required` ;
 - aucune fiche ne porte de nom de famille complet.
 

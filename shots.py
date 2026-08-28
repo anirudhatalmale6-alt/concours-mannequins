@@ -55,6 +55,11 @@ def main():
         ('mannequins.html', 'mannequins-2-grille', '#cms-grid'),
         ('mannequins.html', 'mannequins-3-filtre', 'FILTRE'),
         ('mannequins.html', 'mannequins-4-prive', None),
+        ('photographie.html', 'photo-1-haut', None),
+        ('photographie.html', 'photo-2-prestations', '#prestations'),
+        ('photographie.html', 'photo-3-prix', '#prix'),
+        ('photographie.html', 'photo-4-droits', '#droits'),
+        ('photographie.html', 'photo-5-devis', '#devis'),
     ]
 
     with sync_playwright() as pw:

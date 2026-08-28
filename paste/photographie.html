@@ -1,0 +1,395 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+.cms{--ink:#1c1a24;--mut:#8b8698;--line:#ececf1;--soft:#faf9fc;--tint:#f2f0f6;
+ --acc:#1b1922;--deep:#2b2833;--sph1:#f3f1f5;--sph2:#c9c6d0;--sph3:#6f6b7a;
+ font-family:Poppins,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+ color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
+.cms *,.cms *::before,.cms *::after{box-sizing:border-box}
+.cms img{max-width:100%;height:auto;display:block}
+.cms a{color:inherit}
+
+/* Bandes. Une seule bande sombre par page : au-dela, le charbon cesse
+   d'etre un accent et devient le fond. */
+.cms-s{padding:74px 0;background:#fff}
+.cms-s.soft{background:var(--soft)}
+.cms-s.tint{background:var(--tint);border-block:1px solid #e6e3ee}
+.cms-s.ink{background:var(--acc);color:#fff}
+.cms-s.ink h2,.cms-s.ink h3{color:#fff}
+.cms-s.ink p,.cms-s.ink li,.cms-s.ink .cms-sub{color:#c9c6d0}
+.cms-s.ink .cms-eb{color:#a5a1b0}
+.cms-w{max-width:1120px;margin:0 auto;padding:0 22px}
+
+.cms-eb{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--sph3);font-weight:600;margin:0 0 10px}
+.cms h1,.cms h2,.cms h3{margin:0 0 14px;font-weight:600;letter-spacing:-.015em;
+ color:var(--ink);line-height:1.2}
+.cms h1{font-size:44px}
+.cms h2{font-size:31px}
+.cms h3{font-size:17px;margin-bottom:8px}
+.cms p{margin:0 0 14px}
+.cms-sub{font-size:18px;color:#4a4753;max-width:64ch}
+
+/* Le filet a quatre segments : les quatre tons de la sphere, dans l'ordre.
+   Le premier ton de la sphere (#f3f1f5) est invisible sur blanc — on part
+   donc du deuxieme cran, sinon le filet parait casse a gauche. */
+.cms-rail{display:flex;gap:0;height:3px;width:132px;margin:0 0 26px;
+ border-radius:2px;overflow:hidden}
+.cms-rail i{flex:1}
+.cms-rail i:nth-child(1){background:#dcd9e4}
+.cms-rail i:nth-child(2){background:var(--sph2)}
+.cms-rail i:nth-child(3){background:var(--sph3)}
+.cms-rail i:nth-child(4){background:var(--deep)}
+
+/* Sphere du logo, en CSS : nette a toutes les tailles, contrairement au GIF. */
+.cms-sph{width:46px;height:46px;border-radius:50%;flex:0 0 46px;
+ background:radial-gradient(circle at 34% 30%,var(--sph1) 0%,var(--sph2) 34%,
+ var(--sph3) 72%,var(--deep) 100%);
+ box-shadow:inset -5px -7px 14px rgba(0,0,0,.28),0 4px 12px rgba(27,25,34,.18)}
+.cms-brand{display:flex;align-items:center;gap:13px;margin-bottom:26px}
+.cms-brand b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.cms-brand .tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+ background:var(--acc);color:#fff;padding:4px 9px;border-radius:3px;
+ font-weight:600}
+.cms-s.ink .cms-brand .tag{background:#fff;color:var(--acc)}
+
+/* Le bouton doit etre ecrit « a.cms-btn » et pas « .cms-btn » : la regle
+   generique .cms a{color:inherit} porte une classe ET un element, donc elle
+   bat une simple classe. Ecrit .cms-btn seul, le libelle blanc retombait sur
+   l'encre heritee — bouton charbon, texte charbon, libelle invisible. */
+.cms a.cms-btn,.cms button.cms-btn{display:inline-block;background:var(--acc);
+ color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+ padding:14px 26px;border-radius:6px;border:1px solid var(--acc);
+ cursor:pointer;font-family:inherit;line-height:1.4}
+.cms a.cms-btn.ghost,.cms button.cms-btn.ghost{background:transparent;
+ color:var(--ink);border-color:#d8d5e0}
+.cms-s.ink a.cms-btn,.cms-s.ink button.cms-btn{background:#fff;
+ color:var(--acc);border-color:#fff}
+.cms-s.ink a.cms-btn.ghost,.cms-s.ink button.cms-btn.ghost{
+ background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* Grilles */
+.cms-g{display:grid;gap:18px}
+.cms-g.c2{grid-template-columns:repeat(2,1fr)}
+.cms-g.c3{grid-template-columns:repeat(3,1fr)}
+.cms-g.c4{grid-template-columns:repeat(4,1fr)}
+.cms-card{background:#fff;border:1px solid var(--line);border-radius:10px;
+ padding:22px}
+.cms-s.soft .cms-card,.cms-s.tint .cms-card{background:#fff}
+.cms-s.ink .cms-card{background:#241f2d;border-color:rgba(255,255,255,.14)}
+.cms-card p{font-size:14.8px;color:#4a4753;margin:0}
+.cms-s.ink .cms-card p{color:#d6d3de}
+
+/* Etapes numerotees */
+.cms-steps{list-style:none;margin:0;padding:0;counter-reset:e}
+.cms-steps li{counter-increment:e;display:grid;grid-template-columns:44px 1fr;
+ gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.cms-steps li:first-child{border-top:0}
+.cms-steps li::before{content:counter(e,decimal-leading-zero);
+ font-size:14px;font-weight:600;color:var(--sph3);padding-top:2px}
+.cms-steps p{font-size:14.6px;color:#4a4753;margin:0}
+
+/* Tableau de criteres */
+.cms-tab{width:100%;border-collapse:collapse;font-size:14.8px}
+.cms-tab th,.cms-tab td{text-align:left;padding:13px 14px;
+ border-bottom:1px solid var(--line);vertical-align:top}
+.cms-tab th{width:180px;font-weight:600;color:var(--ink)}
+.cms-tab td{color:#4a4753}
+
+/* Emplacements d'images : le cadre a le ratio final, pose des maintenant.
+   Sans lui, la page saute de 300 px le jour ou les photos arrivent. */
+.cms-fig{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.cms-fig .ph{aspect-ratio:3/4;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;padding:18px;
+ background:radial-gradient(120% 120% at 30% 20%,#f6f5f9 0%,#e9e7ef 55%,
+ #dcd9e4 100%)}
+.cms-fig .ph b{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--sph3);margin-bottom:6px}
+.cms-fig .ph span{font-size:12.5px;color:var(--mut);line-height:1.5;
+ word-break:break-all}
+.cms-fig figcaption{font-size:12.5px;color:var(--mut);padding:10px 12px;
+ background:var(--soft)}
+
+/* Catalogue mannequins */
+.cms-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;
+ padding:18px;background:#fff;border:1px solid var(--line);border-radius:10px;
+ margin-bottom:20px;position:sticky;top:0;z-index:5}
+.cms-f{display:flex;flex-direction:column;gap:5px}
+.cms-f label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+ color:var(--sph3);font-weight:600}
+.cms-f select,.cms-f input{font:inherit;font-size:14px;padding:9px 11px;
+ border:1px solid #d8d5e0;border-radius:6px;background:#fff;color:var(--ink);
+ min-width:132px}
+.cms-count{margin-left:auto;font-size:14px;color:var(--mut);padding-bottom:9px}
+.cms-count b{color:var(--ink)}
+
+.cms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cms-mn{border:1px solid var(--line);border-radius:10px;overflow:hidden;
+ background:#fff}
+.cms-mn .cms-fig{border:0;border-radius:0}
+.cms-mn .bd{padding:14px 15px 16px}
+.cms-mn .nm{display:flex;align-items:baseline;justify-content:space-between;
+ gap:8px;margin-bottom:2px}
+.cms-mn .nm b{font-size:16px;font-weight:600}
+.cms-mn .nm i{font-style:normal;font-size:11.5px;color:var(--mut)}
+.cms-mn .loc{font-size:13px;color:var(--mut);margin-bottom:10px}
+.cms-mn dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;
+ font-size:13px}
+.cms-mn dt{color:var(--mut)}
+.cms-mn dd{margin:0;color:#4a4753}
+.cms-mn .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.cms-mn .tags span{font-size:11px;letter-spacing:.04em;background:var(--tint);
+ color:#4a4753;padding:4px 9px;border-radius:20px}
+.cms-mn .dispo{font-size:11.5px;font-weight:600;padding:3px 9px;
+ border-radius:20px;background:#eaf6ee;color:#1f7a45}
+.cms-mn .dispo.non{background:#f3f1f5;color:var(--mut)}
+.cms-vide{padding:44px 20px;text-align:center;color:var(--mut);
+ border:1px dashed #d8d5e0;border-radius:10px;font-size:15px}
+
+/* Formulaire de candidature */
+.cms-form{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.cms-form .full{grid-column:1/-1}
+.cms-form label{display:block;font-size:12px;letter-spacing:.1em;
+ text-transform:uppercase;color:var(--sph3);font-weight:600;margin-bottom:6px}
+.cms-form input,.cms-form select,.cms-form textarea{width:100%;font:inherit;
+ font-size:15px;padding:12px 13px;border:1px solid #d8d5e0;border-radius:6px;
+ background:#fff}
+.cms-form textarea{min-height:112px;resize:vertical}
+.cms-cons{grid-column:1/-1;display:flex;gap:11px;align-items:flex-start;
+ background:var(--soft);border:1px solid var(--line);border-radius:8px;
+ padding:15px}
+.cms-cons input{width:17px;height:17px;margin-top:3px;flex:0 0 17px}
+.cms-cons span{font-size:13.6px;color:#4a4753;line-height:1.55}
+
+.cms-note{font-size:13.4px;color:var(--mut);border-left:2px solid var(--sph2);
+ padding-left:14px;margin-top:18px}
+.cms-s.ink .cms-note{border-left-color:var(--sph3);color:#a5a1b0}
+
+/* Ce qui reste a trancher — un tarif, une date, un nom. Cadre pointille et
+   pas de rouge invente : la palette n'a pas de couleur, et un tarif absent
+   qui ressemble au texte courant finit par etre lu comme un prix. */
+.cms-tbc{display:inline-block;font-weight:600;font-size:13px;
+ padding:2px 9px;border:1px dashed var(--sph3);border-radius:5px;
+ background:var(--sph1);color:var(--acc);letter-spacing:.02em}
+.cms-s.ink .cms-tbc{background:transparent;border-color:var(--sph3);color:#fff}
+
+/* Fiche prestation : la carte porte un pied fige en bas, pour que les
+   tarifs s'alignent d'une colonne a l'autre au lieu de flotter au gre de la
+   longueur du texte. */
+.cms-pres{display:flex;flex-direction:column;height:100%}
+.cms-pres .meta{font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+ color:var(--mut);margin:0 0 6px}
+.cms-pres ul{margin:12px 0 0;padding-left:18px}
+.cms-pres li{font-size:14.2px;color:#4a4753;margin-bottom:5px}
+.cms-pres .liv{font-size:13.8px;color:#4a4753;margin:14px 0 0;
+ padding-top:12px;border-top:1px solid var(--line)}
+.cms-pres .pied{margin-top:auto;padding-top:14px}
+
+.cms-faq{border-top:1px solid var(--line)}
+.cms-faq details{border-bottom:1px solid var(--line)}
+.cms-faq summary{cursor:pointer;padding:17px 0;font-weight:600;font-size:16px;
+ list-style:none}
+.cms-faq summary::-webkit-details-marker{display:none}
+.cms-faq summary::after{content:"+";float:right;color:var(--mut);
+ font-weight:400;font-size:20px;line-height:1}
+.cms-faq details[open] summary::after{content:"\2212"}
+.cms-faq .a{padding:0 40px 18px 0;font-size:15px;color:#4a4753}
+
+.cms-nav{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;
+ padding:16px 0;border-top:1px solid var(--line);
+ border-bottom:1px solid var(--line);margin-bottom:0}
+.cms-nav a{color:#4a4753;text-decoration:none}
+.cms-nav a:hover{color:var(--ink);text-decoration:underline}
+
+@media (max-width:960px){
+ .cms-grid{grid-template-columns:repeat(3,1fr)}
+ .cms-g.c4{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+ .cms h1{font-size:32px}
+ .cms h2{font-size:25px}
+ .cms-s{padding:52px 0}
+ .cms-g.c2,.cms-g.c3,.cms-g.c4{grid-template-columns:1fr}
+ .cms-grid{grid-template-columns:repeat(2,1fr)}
+ .cms-form{grid-template-columns:1fr}
+ .cms-bar{position:static}
+ .cms-tab th{width:auto;display:block;padding-bottom:2px;border-bottom:0}
+ .cms-tab td{display:block;padding-top:0}
+}
+@media (max-width:460px){
+ .cms-grid{grid-template-columns:1fr}
+}
+</style>
+<div class="cms">
+<section class="cms-s"><div class="cms-w">
+<div class="cms-brand"><div class="cms-sph"></div><b>Photographie</b><span class="tag">Studio et reportage</span></div>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<h1>Le service de photographie</h1>
+<div class="cms-g c2" style="gap:44px;align-items:center">
+<div>
+<p class="cms-sub">8 prestations, du jeu de polaroids agence en trente minutes a la campagne sur deux journees. Books, portraits, e-commerce, lookbook, evenement et video de presentation.</p>
+<p style="margin-top:18px"><a class="cms-btn" href="#devis">Demander un devis</a> <a class="cms-btn ghost" href="#prestations">Voir les prestations</a></p>
+<nav class="cms-nav" style="margin-top:30px"><a href="#prestations">Les prestations</a><a href="#prix">Ce qui fait le prix</a><a href="#deroule">Comment ca se passe</a><a href="#droits">Droits et autorisations</a><a href="#devis">Devis</a><a href="mannequins.html">Catalogue mannequins</a></nav>
+</div>
+<figure class="cms-fig" data-img="images/photo-plateau.jpg" data-ratio="16/9"><div class="ph" style="aspect-ratio:16/9"><b>Image a deposer</b><span>images/photo-plateau.jpg</span></div></figure>
+</div>
+</div></section>
+<section class="cms-s soft" id="prestations"><div class="cms-w">
+<p class="cms-eb">Les prestations</p>
+<h2>Huit formules, ce qu'elles contiennent et ce qu'elles livrent</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<div class="cms-g c3" style="margin-top:28px">
+<div class="cms-card cms-pres" id="p-digitals">
+<p class="meta">Toute candidate au catalogue &middot; 30 minutes</p>
+<h3>Polaroids agence (digitals)</h3>
+<ul><li>Fond uni, lumiere du jour, aucun artifice</li><li>Visage de face, profil droit et gauche, en pied, de dos</li><li>Sans maquillage, cheveux detaches, tenue pres du corps</li></ul>
+<p class="liv"><b>Livre :</b> Le jeu complet, non retouche, en pleine definition</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+<div class="cms-card cms-pres" id="p-book-debut">
+<p class="meta">Debutante, premiere entree au catalogue &middot; Une demi-journee</p>
+<h3>Book de demarrage</h3>
+<ul><li>Trois a quatre changements de tenue</li><li>Studio, fond blanc et fond colore</li><li>Direction de pose : c&#x27;est la moitie du travail sur un premier book</li></ul>
+<p class="liv"><b>Livre :</b> 15 photos retouchees + la planche contact complete</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+<div class="cms-card cms-pres" id="p-book-pro">
+<p class="meta">Mannequin confirmee, mise a jour annuelle &middot; Une journee</p>
+<h3>Book professionnel</h3>
+<ul><li>Studio le matin, exterieur l&#x27;apres-midi</li><li>Six a huit looks, maquillage et coiffure inclus</li><li>Reperage du lieu exterieur fait en amont</li></ul>
+<p class="liv"><b>Livre :</b> 30 photos retouchees, deux formats de cadrage</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+<div class="cms-card cms-pres" id="p-portrait">
+<p class="meta">Comediens, dirigeants, professions liberales &middot; Une heure</p>
+<h3>Portrait et casting comedien</h3>
+<ul><li>Fond neutre, deux ou trois arriere-plans</li><li>Cadrage buste et plan americain</li><li>Tri fait avec la personne, sur place</li></ul>
+<p class="liv"><b>Livre :</b> 5 portraits retouches, formats reseaux et impression</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+<div class="cms-card cms-pres" id="p-ecommerce">
+<p class="meta">Marques et boutiques en ligne &middot; A la journee</p>
+<h3>E-commerce et packshot</h3>
+<ul><li>Sur mannequin ou sur buste, au choix</li><li>Fond blanc detoure, cadrage et lumiere identiques d&#x27;une piece a l&#x27;autre</li><li>Nommage des fichiers selon les references du client</li></ul>
+<p class="liv"><b>Livre :</b> Trois vues par article, detourees, pretes a televerser</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+<div class="cms-card cms-pres" id="p-lookbook">
+<p class="meta">Collections, saisons, lancements &middot; Une a deux journees</p>
+<h3>Lookbook et campagne</h3>
+<ul><li>Equipe complete : maquillage, stylisme, assistant lumiere</li><li>Reperage et plan de prise de vue valides avant le jour J</li><li>Selection en direct sur ecran</li></ul>
+<p class="liv"><b>Livre :</b> Selection retouchee au nombre convenu + fichiers sources conserves 12 mois</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+<div class="cms-card cms-pres" id="p-evenement">
+<p class="meta">Finales, defiles, soirees, remises de prix &middot; A la soiree</p>
+<h3>Couverture d&#x27;evenement</h3>
+<ul><li>Coulisses, scene et salle</li><li>Livraison rapide d&#x27;une premiere selection le lendemain</li><li>Deux photographes possibles sur une soiree a plusieurs scenes</li></ul>
+<p class="liv"><b>Livre :</b> Reportage complet retouche sous cinq jours</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+<div class="cms-card cms-pres" id="p-video">
+<p class="meta">Fiches du catalogue, castings a distance &middot; 20 minutes par personne</p>
+<h3>Video de presentation</h3>
+<ul><li>Prise de parole courte, demarche, tour sur soi</li><li>Son propre, micro-cravate</li><li>Format vertical et horizontal</li></ul>
+<p class="liv"><b>Livre :</b> Un clip de 45 a 60 secondes, monte</p>
+<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>
+</div>
+</div>
+<p class="cms-note"><b>Aucun tarif n'est affiche, et c'est volontaire.</b> Une grille photo se fixe sur le temps, l'equipe, le nombre de photos retouchees et la cession de droits. Les quatre colonnes sont pretes ; les montants se remplissent en une fois, au meme endroit.</p>
+</div></section>
+<section class="cms-s" id="prix"><div class="cms-w">
+<div class="cms-g c2" style="gap:44px;align-items:start">
+<div>
+<p class="cms-eb">Ce qui fait le prix</p>
+<h2>Cinq elements, et pas un forfait unique</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<p>Un devis photo qui ne dit pas sur quoi il repose se negocie mal et se compare encore plus mal. Ces cinq lignes sont ecrites ici plutot que decouvertes au moment du devis.</p>
+<table class="cms-tab" style="margin-top:20px"><tr><th>La cession de droits</th><td>Usage interne, site web, reseaux sociaux, affichage, presse : ce sont cinq prix differents pour la meme photo. La duree et le territoire comptent autant que le support.</td></tr><tr><th>Le nombre de photos retouchees</th><td>La prise de vue est une chose, la retouche en est une autre. On compte les photos livrees, pas les photos prises.</td></tr><tr><th>L&#x27;equipe</th><td>Maquillage, coiffure, stylisme, assistant : chacun se facture. Un book sans maquilleuse et un book avec ne coutent pas pareil, et ne se ressemblent pas non plus.</td></tr><tr><th>Le lieu</th><td>Studio loue a l&#x27;heure, exterieur avec autorisation de tournage, ou locaux du client. Le reperage se paie aussi quand il a lieu.</td></tr><tr><th>Le delai</th><td>Une livraison sous 48 h passe devant le reste du planning. C&#x27;est faisable, ce n&#x27;est pas gratuit.</td></tr></table>
+</div>
+<figure class="cms-fig" data-img="images/photo-lumiere.jpg" data-ratio="3/4"><div class="ph" style="aspect-ratio:3/4"><b>Image a deposer</b><span>images/photo-lumiere.jpg</span></div></figure>
+</div></div></section>
+<section class="cms-s tint" id="deroule"><div class="cms-w">
+<p class="cms-eb">Comment ca se passe</p>
+<h2>Du devis a la livraison</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<ol class="cms-steps" style="margin-top:26px">
+<li><div><h3>Le devis</h3><p>Prestation, nombre de photos livrees, usages prevus, delai. Le devis nomme la cession de droits ; sans elle, il est incomplet.</p></div></li>
+<li><div><h3>La preparation</h3><p>Choix du lieu, reperage si besoin, plan de prise de vue, liste des tenues. Valide avant le jour J, pas pendant.</p></div></li>
+<li><div><h3>La seance</h3><p>Selection en direct sur ecran quand le client est present. Ce qui est ecarte sur place n&#x27;est pas retouche, donc pas facture.</p></div></li>
+<li><div><h3>La retouche</h3><p>Sur les photos retenues seulement. Une premiere planche de validation, puis un tour de corrections compris.</p></div></li>
+<li><div><h3>La livraison</h3><p>Galerie de telechargement, fichiers nommes, formats web et impression. L&#x27;autorisation de droit a l&#x27;image signee est jointe au dossier.</p></div></li>
+</ol>
+</div></section>
+<section class="cms-s ink" id="droits"><div class="cms-w">
+<p class="cms-eb">Droits et autorisations</p>
+<h2>Ce qui se signe, et pourquoi ca protege tout le monde</h2>
+<div class="cms-g c2" style="margin-top:26px">
+<div class="cms-card"><h3>Les photos appartiennent au photographe</h3><p>Le client achete un DROIT D&#x27;USAGE ecrit, defini par support, duree et territoire. C&#x27;est la regle partout, et c&#x27;est ce qui permet de fixer un prix proportionne a l&#x27;usage.</p></div>
+<div class="cms-card"><h3>La personne photographiee signe, toujours</h3><p>Une autorisation de droit a l&#x27;image par seance, qui nomme les usages prevus. Sans elle la photo est inexploitable, meme payee.</p></div>
+<div class="cms-card"><h3>Les mineures ont un cadre a part</h3><p>Accord ecrit des deux parents, horaires encadres, presence d&#x27;un adulte responsable pendant toute la seance. Ce n&#x27;est pas une case a cocher.</p></div>
+<div class="cms-card"><h3>Les fichiers sources restent disponibles douze mois</h3><p>Passe ce delai ils sont archives hors ligne. Une nouvelle livraison reste possible, elle se demande.</p></div>
+</div>
+<p class="cms-note">Le modele d'autorisation de droit a l'image et le bareme de cession restent a rediger avec l'entite juridique qui facturera les seances. Tant qu'ils n'existent pas, cette page annonce le cadre sans le promettre.</p>
+</div></section>
+<section class="cms-s"><div class="cms-w">
+<div class="cms-g c2" style="gap:44px;align-items:center">
+<div>
+<p class="cms-eb">Avec le catalogue</p>
+<h2>Les fiches du catalogue sortent de ces seances</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<p>Chaque mannequin du catalogue est photographiee ici : le jeu de polaroids agence d'abord, qui sert a la fiche, puis le book quand elle est retenue. C'est ce qui garantit que les photos publiees appartiennent bien a la maison et que la personne a signe pour l'usage qui en est fait.</p>
+<p><a class="cms-btn" href="mannequins.html">Voir le catalogue</a> <a class="cms-btn ghost" href="concours.html">La page du concours</a></p>
+</div>
+<figure class="cms-fig" data-img="images/mannequins-studio.jpg" data-ratio="16/9"><div class="ph" style="aspect-ratio:16/9"><b>Image a deposer</b><span>images/mannequins-studio.jpg</span></div></figure>
+</div></div></section>
+<section class="cms-s soft" id="devis"><div class="cms-w">
+<p class="cms-eb">Demander un devis</p>
+<h2>Le devis part sous 48 heures</h2>
+<div class="cms-rail"><i></i><i></i><i></i><i></i></div>
+<form class="cms-form" style="margin-top:22px" method="post" action="#" onsubmit="return false">
+<div><label for="d-nom">Nom</label><input id="d-nom" name="nom" type="text" required></div>
+<div><label for="d-org">Entreprise ou marque</label><input id="d-org" name="organisation" type="text"></div>
+<div><label for="d-tel">Telephone</label><input id="d-tel" name="tel" type="tel" required></div>
+<div><label for="d-ville">Ville de la seance</label><input id="d-ville" name="ville" type="text" required></div>
+<div><label for="d-pres">Prestation</label><select id="d-pres" name="prestation" required><option value="">A determiner ensemble</option><option value="digitals">Polaroids agence (digitals)</option><option value="book-debut">Book de demarrage</option><option value="book-pro">Book professionnel</option><option value="portrait">Portrait et casting comedien</option><option value="ecommerce">E-commerce et packshot</option><option value="lookbook">Lookbook et campagne</option><option value="evenement">Couverture d&#x27;evenement</option><option value="video">Video de presentation</option></select></div>
+<div><label for="d-date">Date souhaitee</label><input id="d-date" name="date" type="date"></div>
+<div class="full"><label for="d-usage">Usage prevu des photos</label><select id="d-usage" name="usage" multiple size="5"><option>Usage interne</option><option>Site web</option><option>Reseaux sociaux</option><option>Fiches produit / e-commerce</option><option>Presse et relations publiques</option><option>Affichage et publicite</option></select></div>
+<div class="full"><label for="d-msg">Le projet en quelques lignes</label><textarea id="d-msg" name="message" rows="4" required></textarea></div>
+<label class="cms-cons"><input type="checkbox" name="donnees" required><span><b>Donnees personnelles.</b> Mes coordonnees servent a repondre a cette demande de devis et a rien d'autre. Je peux en demander la suppression a tout moment.</span></label>
+<label class="cms-cons"><input type="checkbox" name="droit_image" required><span><b>Droit a l'image des personnes photographiees.</b> Je m'engage a ce que chaque personne presente sur les images signe une autorisation avant la seance, et a signaler la presence de mineurs des la demande.</span></label>
+<div class="full"><button class="cms-btn" type="submit">Demander le devis</button></div>
+</form>
+<p class="cms-note"><b>Ce formulaire n'envoie encore rien</b> — il attend l'adresse de reception et l'entite juridique, comme les deux autres pages.</p>
+</div></section>
+<section class="cms-s" id="faq-photo"><div class="cms-w">
+<p class="cms-eb">Questions</p>
+<h2>Ce qu'on demande avant de commander</h2>
+<div class="cms-faq" style="margin-top:22px">
+<details><summary>Combien coute une seance ?</summary><div class="a">Aucun prix n&#x27;est affiche sur cette page tant que la grille tarifaire n&#x27;est pas arretee. Un tarif photo se construit sur quatre elements — le temps, l&#x27;equipe, le nombre de photos retouchees et la cession de droits — et un chiffre pose au hasard serait un engagement pris a la legere. Le devis part sous 48 h.</div></details>
+<details><summary>Pourquoi la cession de droits change-t-elle le prix ?</summary><div class="a">Parce que ce n&#x27;est pas la meme chose de mettre une photo sur un site pendant un an et de l&#x27;afficher en 4x3 dans le metro. Le tarif suit l&#x27;usage : support, duree, territoire.</div></details>
+<details><summary>Puis-je utiliser les photos partout, tout le temps ?</summary><div class="a">Seulement si le devis le prevoit. Un usage etendu se demande a la commande, ou se rachete apres — c&#x27;est toujours moins cher a la commande.</div></details>
+<details><summary>Que se passe-t-il si la personne photographiee change d&#x27;avis ?</summary><div class="a">Elle peut retirer son autorisation pour les usages futurs. Ce qui est deja imprime ou diffuse ne se rattrape pas, et c&#x27;est justement pourquoi l&#x27;autorisation nomme les usages des le depart.</div></details>
+<details><summary>Faites-vous les seances a domicile ou en entreprise ?</summary><div class="a">Oui, avec un materiel d&#x27;eclairage transporte. Le lieu se repere avant : une salle de reunion en contre-jour coute une heure de seance.</div></details>
+<details><summary>Les mineures peuvent-elles etre photographiees ?</summary><div class="a">Avec l&#x27;accord ecrit des deux parents et un adulte responsable present pendant toute la seance. Les fichiers ne partent nulle part sans ce meme accord.</div></details>
+</div>
+</div></section>
+</div>
+<script>
+/* Remplace chaque cadre par la vraie image des qu'elle existe. On teste le
+   chargement AVANT de toucher au DOM : si le fichier manque, le cadre nomme
+   reste en place au lieu d'une icone d'image cassee. */
+(function(){
+ var f=document.querySelectorAll('.cms-fig[data-img]');
+ for(var i=0;i<f.length;i++){(function(fig){
+  var src=fig.getAttribute('data-img'),im=new Image();
+  im.onload=function(){
+   var box=fig.querySelector('.ph');if(!box)return;
+   im.style.width='100%';im.style.display='block';
+   im.style.aspectRatio=fig.getAttribute('data-ratio')||'3/4';
+   im.style.objectFit='cover';im.alt='';
+   box.parentNode.replaceChild(im,box);
+  };
+  im.src=src;
+ })(f[i]);}
+})();
+</script>

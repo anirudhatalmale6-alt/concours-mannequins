@@ -41,7 +41,7 @@ def main():
     # Le nombre est COMPTE, jamais ecrit : la premiere version disait « six »
     # pour cinq emplacements, et un document qui se trompe sur ce qu'il
     # contient lui-meme n'est plus une reference.
-    o = ['# Les images des deux pages', '',
+    o = ['# Les images des trois pages', '',
          '%d emplacements, %d fichiers a deposer.' % (len(IMAGES), len(IMAGES)),
          '', REGLES, '', '---', '']
     for i, (src, ratio, sujet) in enumerate(IMAGES, 1):

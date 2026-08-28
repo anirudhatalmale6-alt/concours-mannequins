@@ -1,6 +1,6 @@
 # Les images des deux pages
 
-5 emplacements, 5 fichiers a deposer.
+7 emplacements, 7 fichiers a deposer.
 
 Trois regles a garder sur ces images, quel que soit l'outil :
 
@@ -57,6 +57,20 @@ nomme le fichier attendu, et des qu'il existe elle affiche l'image.
 - Sujet : Un book ouvert sur une table, planches contact, sans photo lisible.
 
 > Un book ouvert sur une table, planches contact, sans photo lisible. Photographie realiste, lumiere naturelle douce, palette sobre (charbon, gris perle, blanc casse), sans saturation, sans texte, sans logo, sans visage reconnaissable.
+
+## 6. `images/photo-plateau.jpg`
+
+- Ratio : **16/9**
+- Sujet : Plateau de prise de vue vu de derriere l'appareil : fond cyclo, deux boites a lumiere, trepied. Aucun visage.
+
+> Plateau de prise de vue vu de derriere l'appareil : fond cyclo, deux boites a lumiere, trepied. Aucun visage. Photographie realiste, lumiere naturelle douce, palette sobre (charbon, gris perle, blanc casse), sans saturation, sans texte, sans logo, sans visage reconnaissable.
+
+## 7. `images/photo-lumiere.jpg`
+
+- Ratio : **3/4**
+- Sujet : Materiel d'eclairage range : pieds, parapluies, reflecteur, mallette ouverte. Aucune personne.
+
+> Materiel d'eclairage range : pieds, parapluies, reflecteur, mallette ouverte. Aucune personne. Photographie realiste, lumiere naturelle douce, palette sobre (charbon, gris perle, blanc casse), sans saturation, sans texte, sans logo, sans visage reconnaissable.
 
 ---
 

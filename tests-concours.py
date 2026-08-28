@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Controles sur les deux pages generees.
+"""Controles sur les trois pages generees.
 
 Ce qui est verifie ici n'est pas « la page existe » mais « la page dit vrai » :
 les nombres affiches sortent bien du catalogue, aucune couleur n'a ete
@@ -37,6 +37,7 @@ P = os.path.join(ICI, 'paste')
 lire = lambda p: open(p, encoding='utf-8').read()
 CONC = lire(os.path.join(D, 'concours.html'))
 MANN = lire(os.path.join(D, 'mannequins.html'))
+PHOT = lire(os.path.join(D, 'photographie.html'))
 CAT = json.load(open(os.path.join(D, 'catalogue.json'), encoding='utf-8'))
 FICHES = mannequins()
 
@@ -189,7 +190,7 @@ print('\n--- le concours n\'engage rien qui ne soit valide ---')
 INTERDITS = ['miss france', 'miss univers', 'miss universe', 'miss world',
              'miss monde', 'miss canada', 'miss quebec', 'miss belgique',
              'miss earth', 'miss international', 'miss teen']
-bas = (CONC + MANN).lower()
+bas = (CONC + MANN + PHOT).lower()
 present = [m for m in INTERDITS if m in bas]
 t('aucun nom de concours existant n\'est ecrit dans les pages',
   not present, present)
@@ -208,7 +209,8 @@ t('la page annonce l\'age minimum sans ambiguite',
 
 print('\n--- consentement et donnees personnelles ---')
 
-for nom, page in (('concours', CONC), ('mannequins', MANN)):
+for nom, page in (('concours', CONC), ('mannequins', MANN),
+                  ('photographie', PHOT)):
     cases = re.findall(r'<input type="checkbox"[^>]*>', page)
     t('%s : au moins deux cases de consentement' % nom, len(cases) >= 2,
       len(cases))
@@ -225,12 +227,11 @@ t('le catalogue exige la majorite a la candidature',
 
 # Un formulaire branche avant d'avoir une adresse de reception collecte des
 # donnees personnelles que personne n'est en mesure de traiter.
-actions = re.findall(r'<form[^>]*action="([^"]*)"', CONC + MANN)
+actions = re.findall(r'<form[^>]*action="([^"]*)"', CONC + MANN + PHOT)
 t('aucun formulaire n\'envoie vers une adresse inventee',
   all(a == '#' for a in actions), actions)
-t('les deux pages disent que le formulaire n\'envoie encore rien',
-  CONC.count('n\'envoie encore rien') + MANN.count('n\'envoie encore rien') >= 2
-  or (CONC + MANN).count('envoie encore rien') >= 2)
+t('les trois pages disent que le formulaire n\'envoie encore rien',
+  (CONC + MANN + PHOT).count('envoie encore rien') >= 3)
 
 print('\n--- vie privee du catalogue ---')
 
@@ -247,7 +248,7 @@ print('\n--- les images ---')
 
 from build import IMAGES   # noqa: E402
 manquantes = [src for src, _, _ in IMAGES
-              if src.startswith('images/') and src not in CONC + MANN]
+              if src.startswith('images/') and src not in CONC + MANN + PHOT]
 t('chaque emplacement d\'image declare apparait bien dans une page',
   not manquantes, manquantes)
 t('un emplacement vide NOMME le fichier attendu au lieu d\'une image cassee',
@@ -261,12 +262,99 @@ t('aucun attribut onerror inline (le remplacement passe par des data-)',
   not inline, len(inline))
 t('les cartes du catalogue nomment aussi leur photo manquante',
   'Photo a deposer' in MANN)
-t('le ratio est pose d\'avance pour que la page ne saute pas',
-  'aspect-ratio' in CSS)
+# « aspect-ratio est present dans la feuille » ne prouvait rien : la regle
+# posait 3/4 sur TOUS les cadres, y compris les slots 16/9. On compare donc
+# le ratio declare et le ratio effectivement pose sur chaque cadre.
+TOUT = CONC + MANN + PHOT
+paires = re.findall(r'data-ratio="([^"]+)"><div class="ph" '
+                    r'style="aspect-ratio:([^"]+)"', TOUT)
+faux = [(a, b) for a, b in paires if a != b]
+nb_fig = TOUT.count('data-img="images/')
+t('chaque cadre declare porte le ratio de son image (%d cadres)' % nb_fig,
+  len(paires) == nb_fig and not faux, faux or '%d/%d' % (len(paires), nb_fig))
+# Y compris les cartes du catalogue, fabriquees en JavaScript : un cadre
+# sans ratio laisse la grille se replier quand les photos arrivent.
+sans = re.findall(r'class="ph"(?![^>]*aspect-ratio)', TOUT)
+t('aucun cadre, JavaScript compris, ne reste sans ratio', not sans, len(sans))
+
+print('\n--- le service de photographie ---')
+
+import html as _H                                          # noqa: E402
+from donnees import (PHOTO_PRESTATIONS, PHOTO_VARIABLES,   # noqa: E402
+                     PHOTO_DROITS, PHOTO_ETAPES, PHOTO_FAQ)
+
+# Le HTML genere est ECHAPPE : « Couverture d'evenement » y est ecrit
+# « Couverture d&#x27;evenement ». Chercher la chaine brute faisait echouer
+# deux controles sur les seuls libelles qui portent une apostrophe — un faux
+# rouge qui vient du controle, pas de la page.
+esc = lambda x: _H.escape(str(x), quote=True)
+
+absentes = [n for _c, n, _q, _d, _i, _l in PHOTO_PRESTATIONS
+            if esc(n) not in PHOT]
+t('les %d prestations declarees sont toutes sur la page'
+  % len(PHOTO_PRESTATIONS), not absentes, absentes)
+
+t('la page annonce le vrai nombre de prestations (%d)'
+  % len(PHOTO_PRESTATIONS), '%d prestations' % len(PHOTO_PRESTATIONS) in PHOT)
+
+# Un tarif manquant sur une seule fiche passerait inapercu a l'oeil : on
+# compte, on ne regarde pas.
+t('chaque prestation porte son marqueur de tarif a trancher',
+  PHOT.count('TARIF A CONFIRMER') == len(PHOTO_PRESTATIONS),
+  '%d marqueurs pour %d prestations'
+  % (PHOT.count('TARIF A CONFIRMER'), len(PHOTO_PRESTATIONS)))
+
+# LE controle qui compte. Un prix invente sur une page de services, c'est un
+# engagement commercial pris a la place du client — et il depend d'une
+# cession de droits que je ne connais pas. Aucun signe monetaire, nulle part.
+argent = re.findall(r'(?i)\$|€|\bEUR\b|\bUSD\b|\bCAD\b|\beuros?\b|\bdollars?\b',
+                    PHOT)
+t('aucun montant ni symbole monetaire n\'est ecrit sur la page photo',
+  not argent, sorted(set(argent)))
+
+t('la page nomme la cession de droits comme element du prix',
+  PHOT.lower().count('cession de droits') >= 2)
+t('la page ecrit le cadre des mineurs au lieu d\'une case a cocher',
+  'mineur' in PHOT.lower() and 'deux parents' in PHOT)
+t('la page dit que la personne photographiee signe une autorisation',
+  'autorisation' in PHOT.lower() and 'droit a l\'image' in PHOT.lower()
+  or 'droit a l&#x27;image' in PHOT.lower())
+
+# L'usage prevu conditionne le prix : le demander apres coup oblige a refaire
+# le devis.
+t('le formulaire de devis demande l\'usage prevu des photos',
+  'name="usage"' in PHOT)
+
+t('les %d elements de prix, les %d etapes et les %d questions sont tous rendus'
+  % (len(PHOTO_VARIABLES), len(PHOTO_ETAPES), len(PHOTO_FAQ)),
+  all(esc(x[0]) in PHOT for x in PHOTO_VARIABLES)
+  and all(esc(x[1]) in PHOT for x in PHOTO_ETAPES)
+  and PHOT.count('<details>') == len(PHOTO_FAQ),
+  '%d details' % PHOT.count('<details>'))
+
+t('les %d blocs droits sont rendus' % len(PHOTO_DROITS),
+  all(esc(titre) in PHOT for titre, _ in PHOTO_DROITS))
+
+# Une ancre par prestation, et pas deux fois la meme : les liens profonds
+# servent a envoyer un client sur UNE formule.
+ancres = re.findall(r'id="(p-[a-z-]+)"', PHOT)
+t('chaque prestation a une ancre, et toutes sont distinctes',
+  len(ancres) == len(PHOTO_PRESTATIONS) == len(set(ancres)), ancres)
+
+print('\n--- les trois pages se renvoient l\'une a l\'autre ---')
+
+t('le concours et le catalogue renvoient vers la photographie',
+  'photographie.html' in CONC and 'photographie.html' in MANN)
+t('la photographie renvoie vers le catalogue et le concours',
+  'mannequins.html' in PHOT and 'concours.html' in PHOT)
+IDX = lire(os.path.join(D, 'index.html'))
+t('l\'index d\'apercu liste bien les trois pages',
+  all(p in IDX for p in ('concours.html', 'mannequins.html',
+                         'photographie.html')))
 
 print('\n--- le bloc a coller ---')
 
-for nom in ('concours', 'mannequins'):
+for nom in ('concours', 'mannequins', 'photographie'):
     b = lire(os.path.join(P, nom + '.html'))
     t('%s : le bloc a coller ne contient ni <html> ni <head>' % nom,
       '<html' not in b.lower() and '<head' not in b.lower())
@@ -278,8 +366,8 @@ for nom in ('concours', 'mannequins'):
 print('\n--- echappement ---')
 
 t('le HTML genere n\'a pas de balise ouverte non fermee evidente',
-  CONC.count('<section') == CONC.count('</section>')
-  and MANN.count('<section') == MANN.count('</section>'))
+  all(p.count('<section') == p.count('</section>')
+      for p in (CONC, MANN, PHOT)))
 t('les apostrophes des donnees ne cassent pas le JSON du catalogue',
   json.loads(json.dumps(CAT)) == CAT)
 

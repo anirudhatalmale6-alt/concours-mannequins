@@ -164,6 +164,26 @@
  padding-left:14px;margin-top:18px}
 .cms-s.ink .cms-note{border-left-color:var(--sph3);color:#a5a1b0}
 
+/* Ce qui reste a trancher — un tarif, une date, un nom. Cadre pointille et
+   pas de rouge invente : la palette n'a pas de couleur, et un tarif absent
+   qui ressemble au texte courant finit par etre lu comme un prix. */
+.cms-tbc{display:inline-block;font-weight:600;font-size:13px;
+ padding:2px 9px;border:1px dashed var(--sph3);border-radius:5px;
+ background:var(--sph1);color:var(--acc);letter-spacing:.02em}
+.cms-s.ink .cms-tbc{background:transparent;border-color:var(--sph3);color:#fff}
+
+/* Fiche prestation : la carte porte un pied fige en bas, pour que les
+   tarifs s'alignent d'une colonne a l'autre au lieu de flotter au gre de la
+   longueur du texte. */
+.cms-pres{display:flex;flex-direction:column;height:100%}
+.cms-pres .meta{font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+ color:var(--mut);margin:0 0 6px}
+.cms-pres ul{margin:12px 0 0;padding-left:18px}
+.cms-pres li{font-size:14.2px;color:#4a4753;margin-bottom:5px}
+.cms-pres .liv{font-size:13.8px;color:#4a4753;margin:14px 0 0;
+ padding-top:12px;border-top:1px solid var(--line)}
+.cms-pres .pied{margin-top:auto;padding-top:14px}
+
 .cms-faq{border-top:1px solid var(--line)}
 .cms-faq details{border-bottom:1px solid var(--line)}
 .cms-faq summary{cursor:pointer;padding:17px 0;font-weight:600;font-size:16px;
@@ -208,8 +228,9 @@
 <div>
 <p class="cms-sub">48 profils, 8 villes, 6 categories, de 160 a 182 cm. Filtrez, puis demandez le book complet des profils qui vous interessent.</p>
 <p style="margin-top:18px"><a class="cms-btn" href="#cms-grid">Parcourir le catalogue</a> <a class="cms-btn ghost" href="#candidature-mannequin">Deposer mon book</a></p>
+<nav class="cms-nav" style="margin-top:30px"><a href="#cms-grid">Le catalogue</a><a href="#candidature-mannequin">Deposer son book</a><a href="photographie.html">Service de photographie</a><a href="concours.html">La page du concours</a></nav>
 </div>
-<figure class="cms-fig" data-img="images/mannequins-studio.jpg" data-ratio="16/9"><div class="ph"><b>Image a deposer</b><span>images/mannequins-studio.jpg</span></div></figure>
+<figure class="cms-fig" data-img="images/mannequins-studio.jpg" data-ratio="16/9"><div class="ph" style="aspect-ratio:16/9"><b>Image a deposer</b><span>images/mannequins-studio.jpg</span></div></figure>
 </div>
 </div></section>
 <section class="cms-s soft"><div class="cms-w">
@@ -244,7 +265,7 @@
 <p>Chaque fiche appartient a une personne qui a signe. C'est la seule facon de batir un catalogue qui tient : une photo reprise ailleurs, c'est le book d'une autre agence et le droit a l'image de quelqu'un qui n'a rien accepte.</p>
 <p><a class="cms-btn" href="#candidature-mannequin">Deposer mon book</a></p>
 </div>
-<figure class="cms-fig" data-img="images/mannequins-book.jpg" data-ratio="3/4"><div class="ph"><b>Image a deposer</b><span>images/mannequins-book.jpg</span></div></figure>
+<figure class="cms-fig" data-img="images/mannequins-book.jpg" data-ratio="3/4"><div class="ph" style="aspect-ratio:3/4"><b>Image a deposer</b><span>images/mannequins-book.jpg</span></div></figure>
 </div></div></section>
 <section class="cms-s tint" id="candidature-mannequin"><div class="cms-w">
 <p class="cms-eb">Candidature mannequin</p>
@@ -303,7 +324,8 @@ window.cmsImages=function(){
  function carte(m){
   return '<article class="cms-mn">'
    +'<figure class="cms-fig" data-img="'+esc(m.photo)+'" data-ratio="3/4">'
-   +'<div class="ph"><b>Photo a deposer</b><span>'+esc(m.photo)+'</span></div>'
+   +'<div class="ph" style="aspect-ratio:3/4"><b>Photo a deposer</b>'
+   +'<span>'+esc(m.photo)+'</span></div>'
    +'</figure><div class="bd">'
    +'<div class="nm"><b>'+esc(m.prenom)+' '+esc(m.initiale)+'</b>'
    +'<span class="dispo'+(m.disponible?'':' non')+'">'

@@ -178,6 +178,26 @@ CSS = """
  padding-left:14px;margin-top:18px}
 .cms-s.ink .cms-note{border-left-color:var(--sph3);color:#a5a1b0}
 
+/* Ce qui reste a trancher — un tarif, une date, un nom. Cadre pointille et
+   pas de rouge invente : la palette n'a pas de couleur, et un tarif absent
+   qui ressemble au texte courant finit par etre lu comme un prix. */
+.cms-tbc{display:inline-block;font-weight:600;font-size:13px;
+ padding:2px 9px;border:1px dashed var(--sph3);border-radius:5px;
+ background:var(--sph1);color:var(--acc);letter-spacing:.02em}
+.cms-s.ink .cms-tbc{background:transparent;border-color:var(--sph3);color:#fff}
+
+/* Fiche prestation : la carte porte un pied fige en bas, pour que les
+   tarifs s'alignent d'une colonne a l'autre au lieu de flotter au gre de la
+   longueur du texte. */
+.cms-pres{display:flex;flex-direction:column;height:100%}
+.cms-pres .meta{font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+ color:var(--mut);margin:0 0 6px}
+.cms-pres ul{margin:12px 0 0;padding-left:18px}
+.cms-pres li{font-size:14.2px;color:#4a4753;margin-bottom:5px}
+.cms-pres .liv{font-size:13.8px;color:#4a4753;margin:14px 0 0;
+ padding-top:12px;border-top:1px solid var(--line)}
+.cms-pres .pied{margin-top:auto;padding-top:14px}
+
 .cms-faq{border-top:1px solid var(--line)}
 .cms-faq details{border-bottom:1px solid var(--line)}
 .cms-faq summary{cursor:pointer;padding:17px 0;font-weight:600;font-size:16px;

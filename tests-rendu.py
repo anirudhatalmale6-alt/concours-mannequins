@@ -67,7 +67,7 @@ def main():
     with sync_playwright() as pw:
         nav = pw.chromium.launch()
 
-        for page in ('concours.html', 'mannequins.html'):
+        for page in ('concours.html', 'mannequins.html', 'photographie.html'):
             pg = nav.new_page(viewport={'width': 1280, 'height': 900})
             pg.goto(base + page, wait_until='networkidle')
             print('\n--- %s, mesure a l\'ecran ---' % page)
@@ -86,6 +86,22 @@ def main():
                 txt = (b.inner_text() or '').strip()[:34]
                 t('bouton « %s » : libelle lisible (contraste %.1f:1)'
                   % (txt, c), c >= 4.5, '%s sur %s' % (fg, bg))
+
+            # Les marqueurs « a trancher » : un tarif manquant qui s'affiche
+            # dans un ton trop clair se lit comme du texte decoratif et
+            # personne ne le remplit. Meme mesure que pour les boutons.
+            tbc = pg.locator('.cms-tbc')
+            for i in range(tbc.count()):
+                el = tbc.nth(i)
+                fg = el.evaluate("e=>getComputedStyle(e).color")
+                bg = el.evaluate("""e=>{let x=e;while(x){let c=
+                    getComputedStyle(x).backgroundColor;
+                    if(c&&c!=='rgba(0, 0, 0, 0)')return c;x=x.parentElement;}
+                    return 'rgb(255,255,255)';}""")
+                c = contraste(fg, bg)
+                t('marqueur « %s » lisible (contraste %.1f:1)'
+                  % ((el.inner_text() or '').strip()[:24], c), c >= 4.5,
+                  '%s sur %s' % (fg, bg))
 
             # Le meme piege peut frapper n'importe quel titre pose sur la
             # bande sombre : on mesure aussi la, plutot que de supposer.

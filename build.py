@@ -18,7 +18,9 @@ import json
 import os
 
 from donnees import (CONCOURS, ETAPES, CRITERES, JURY, PRIX, FAQ, A_TRANCHER,
-                     CATEGORIES, mannequins)
+                     CATEGORIES, mannequins,
+                     PHOTO_PRESTATIONS, PHOTO_VARIABLES, PHOTO_DROITS,
+                     PHOTO_ETAPES, PHOTO_FAQ)
 from style import CSS
 
 ICI = os.path.dirname(os.path.abspath(__file__))
@@ -43,6 +45,12 @@ IMAGES = [
      'Studio photo vide : fond cyclo, boites a lumiere, trepied. Aucun visage.'),
     ('images/mannequins-book.jpg', '3/4',
      'Un book ouvert sur une table, planches contact, sans photo lisible.'),
+    ('images/photo-plateau.jpg', '16/9',
+     'Plateau de prise de vue vu de derriere l\'appareil : fond cyclo, deux '
+     'boites a lumiere, trepied. Aucun visage.'),
+    ('images/photo-lumiere.jpg', '3/4',
+     'Materiel d\'eclairage range : pieds, parapluies, reflecteur, mallette '
+     'ouverte. Aucune personne.'),
 ]
 
 
@@ -69,10 +77,15 @@ def figure(src, ratio, legende):
     aucun HTML a retoucher. Les attributs sont des data- lus par un script,
     jamais un onerror inline : un onerror a guillemets imbriques se casse des
     qu'un editeur reencode le bloc."""
+    # Le cadre porte DEJA le ratio de l'image attendue. Sans ca il gardait le
+    # 3/4 de la feuille de style quel que soit le ratio declare : un slot
+    # 16/9 s'affichait en portrait, la colonne d'a cote se centrait sur une
+    # hauteur fausse, et la page sautait le jour ou le fichier arrivait.
     return (
         '<figure class="cms-fig" data-img="%s" data-ratio="%s">'
-        '<div class="ph"><b>Image a deposer</b><span>%s</span></div>'
-        '</figure>' % (e(src), e(ratio), e(src)))
+        '<div class="ph" style="aspect-ratio:%s"><b>Image a deposer</b>'
+        '<span>%s</span></div></figure>'
+        % (e(src), e(ratio), e(ratio), e(src)))
 
 
 SCRIPT_PH = """
@@ -130,7 +143,8 @@ def page_concours():
       '<a href="#etapes">Les etapes</a><a href="#criteres">Qui peut '
       'candidater</a><a href="#prix">Ce que gagnent les finalistes</a>'
       '<a href="#jury">Le jury</a><a href="#candidature">Candidature</a>'
-      '<a href="#faq">Questions</a></nav>')
+      '<a href="#faq">Questions</a>'
+      '<a href="photographie.html">Photographie</a></nav>')
     A('</div></section>')
 
     # Ce que c'est
@@ -306,6 +320,11 @@ def page_mannequins():
     A('<p style="margin-top:18px"><a class="cms-btn" href="#cms-grid">'
       'Parcourir le catalogue</a> <a class="cms-btn ghost" '
       'href="#candidature-mannequin">Deposer mon book</a></p>')
+    A('<nav class="cms-nav" style="margin-top:30px">'
+      '<a href="#cms-grid">Le catalogue</a>'
+      '<a href="#candidature-mannequin">Deposer son book</a>'
+      '<a href="photographie.html">Service de photographie</a>'
+      '<a href="concours.html">La page du concours</a></nav>')
     A('</div>')
     A(figure('images/mannequins-studio.jpg', '16/9', 'Studio'))
     A('</div>')
@@ -429,6 +448,196 @@ def page_mannequins():
     return '\n'.join(o)
 
 
+# --------------------------------------------------------------------------
+# page 3 : le service de photographie
+#
+# Page a part et non section du catalogue : c'est une prestation qui se vend
+# a des clients qui ne cherchent pas de mannequin (portraits, e-commerce,
+# entreprises). Enterree en bas d'un catalogue, elle ne serait jamais
+# trouvee par ceux-la. Les deux pages se renvoient l'une a l'autre.
+# --------------------------------------------------------------------------
+
+def page_photographie():
+    o = []
+    A = o.append
+    A('<div class="cms">')
+
+    A('<section class="cms-s"><div class="cms-w">')
+    A(brand('Photographie', 'Studio et reportage'))
+    A(rail())
+    A('<h1>Le service de photographie</h1>')
+    A('<div class="cms-g c2" style="gap:44px;align-items:center">')
+    A('<div>')
+    A('<p class="cms-sub">%d prestations, du jeu de polaroids agence en '
+      'trente minutes a la campagne sur deux journees. Books, portraits, '
+      'e-commerce, lookbook, evenement et video de presentation.</p>'
+      % len(PHOTO_PRESTATIONS))
+    A('<p style="margin-top:18px"><a class="cms-btn" href="#devis">Demander '
+      'un devis</a> <a class="cms-btn ghost" href="#prestations">Voir les '
+      'prestations</a></p>')
+    A('<nav class="cms-nav" style="margin-top:30px">'
+      '<a href="#prestations">Les prestations</a>'
+      '<a href="#prix">Ce qui fait le prix</a>'
+      '<a href="#deroule">Comment ca se passe</a>'
+      '<a href="#droits">Droits et autorisations</a>'
+      '<a href="#devis">Devis</a>'
+      '<a href="mannequins.html">Catalogue mannequins</a></nav>')
+    A('</div>')
+    A(figure('images/photo-plateau.jpg', '16/9', 'Plateau'))
+    A('</div>')
+    A('</div></section>')
+
+    # Les prestations
+    A('<section class="cms-s soft" id="prestations"><div class="cms-w">')
+    A('<p class="cms-eb">Les prestations</p>')
+    A('<h2>Huit formules, ce qu\'elles contiennent et ce qu\'elles livrent</h2>')
+    A(rail())
+    A('<div class="cms-g c3" style="margin-top:28px">')
+    for cle, nom, qui, duree, inclus, livrable in PHOTO_PRESTATIONS:
+        A('<div class="cms-card cms-pres" id="p-%s">' % e(cle))
+        A('<p class="meta">%s &middot; %s</p>' % (e(qui), e(duree)))
+        A('<h3>%s</h3>' % e(nom))
+        A('<ul>%s</ul>' % ''.join('<li>%s</li>' % e(x) for x in inclus))
+        A('<p class="liv"><b>Livre :</b> %s</p>' % e(livrable))
+        # Le tarif est un trou ASSUME et visible. Voir donnees.py : un prix
+        # de shooting depend de la cession de droits, que je ne connais pas.
+        A('<p class="pied"><span class="cms-tbc">TARIF A CONFIRMER</span></p>')
+        A('</div>')
+    A('</div>')
+    A('<p class="cms-note"><b>Aucun tarif n\'est affiche, et c\'est '
+      'volontaire.</b> Une grille photo se fixe sur le temps, l\'equipe, le '
+      'nombre de photos retouchees et la cession de droits. Les quatre '
+      'colonnes sont pretes ; les montants se remplissent en une fois, au '
+      'meme endroit.</p>')
+    A('</div></section>')
+
+    # Ce qui fait le prix
+    A('<section class="cms-s" id="prix"><div class="cms-w">')
+    A('<div class="cms-g c2" style="gap:44px;align-items:start">')
+    A('<div>')
+    A('<p class="cms-eb">Ce qui fait le prix</p>')
+    A('<h2>Cinq elements, et pas un forfait unique</h2>')
+    A(rail())
+    A('<p>Un devis photo qui ne dit pas sur quoi il repose se negocie mal et '
+      'se compare encore plus mal. Ces cinq lignes sont ecrites ici plutot '
+      'que decouvertes au moment du devis.</p>')
+    A('<table class="cms-tab" style="margin-top:20px">%s</table>'
+      % ''.join('<tr><th>%s</th><td>%s</td></tr>' % (e(t_), e(d))
+                for t_, d in PHOTO_VARIABLES))
+    A('</div>')
+    A(figure('images/photo-lumiere.jpg', '3/4', 'Materiel'))
+    A('</div></div></section>')
+
+    # Deroule
+    A('<section class="cms-s tint" id="deroule"><div class="cms-w">')
+    A('<p class="cms-eb">Comment ca se passe</p>')
+    A('<h2>Du devis a la livraison</h2>')
+    A(rail())
+    A('<ol class="cms-steps" style="margin-top:26px">')
+    for _n, titre, txt in PHOTO_ETAPES:
+        A('<li><div><h3>%s</h3><p>%s</p></div></li>' % (e(titre), e(txt)))
+    A('</ol>')
+    A('</div></section>')
+
+    # Droits — la bande sombre, la seule de la page.
+    A('<section class="cms-s ink" id="droits"><div class="cms-w">')
+    A('<p class="cms-eb">Droits et autorisations</p>')
+    A('<h2>Ce qui se signe, et pourquoi ca protege tout le monde</h2>')
+    A('<div class="cms-g c2" style="margin-top:26px">')
+    for titre, txt in PHOTO_DROITS:
+        A('<div class="cms-card"><h3>%s</h3><p>%s</p></div>'
+          % (e(titre), e(txt)))
+    A('</div>')
+    A('<p class="cms-note">Le modele d\'autorisation de droit a l\'image et '
+      'le bareme de cession restent a rediger avec l\'entite juridique qui '
+      'facturera les seances. Tant qu\'ils n\'existent pas, cette page '
+      'annonce le cadre sans le promettre.</p>')
+    A('</div></section>')
+
+    # Le lien avec le catalogue
+    A('<section class="cms-s"><div class="cms-w">')
+    A('<div class="cms-g c2" style="gap:44px;align-items:center">')
+    A('<div>')
+    A('<p class="cms-eb">Avec le catalogue</p>')
+    A('<h2>Les fiches du catalogue sortent de ces seances</h2>')
+    A(rail())
+    A('<p>Chaque mannequin du catalogue est photographiee ici : le jeu de '
+      'polaroids agence d\'abord, qui sert a la fiche, puis le book quand '
+      'elle est retenue. C\'est ce qui garantit que les photos publiees '
+      'appartiennent bien a la maison et que la personne a signe pour '
+      'l\'usage qui en est fait.</p>')
+    A('<p><a class="cms-btn" href="mannequins.html">Voir le catalogue</a> '
+      '<a class="cms-btn ghost" href="concours.html">La page du '
+      'concours</a></p>')
+    A('</div>')
+    A(figure('images/mannequins-studio.jpg', '16/9', 'Studio'))
+    A('</div></div></section>')
+
+    # Devis
+    A('<section class="cms-s soft" id="devis"><div class="cms-w">')
+    A('<p class="cms-eb">Demander un devis</p>')
+    A('<h2>Le devis part sous 48 heures</h2>')
+    A(rail())
+    A('<form class="cms-form" style="margin-top:22px" method="post" '
+      'action="#" onsubmit="return false">')
+    A('<div><label for="d-nom">Nom</label>'
+      '<input id="d-nom" name="nom" type="text" required></div>')
+    A('<div><label for="d-org">Entreprise ou marque</label>'
+      '<input id="d-org" name="organisation" type="text"></div>')
+    A('<div><label for="d-tel">Telephone</label>'
+      '<input id="d-tel" name="tel" type="tel" required></div>')
+    A('<div><label for="d-ville">Ville de la seance</label>'
+      '<input id="d-ville" name="ville" type="text" required></div>')
+    A('<div><label for="d-pres">Prestation</label>'
+      '<select id="d-pres" name="prestation" required>'
+      '<option value="">A determiner ensemble</option>%s</select></div>'
+      % ''.join('<option value="%s">%s</option>' % (e(c), e(n))
+                for c, n, _q, _d, _i, _l in PHOTO_PRESTATIONS))
+    A('<div><label for="d-date">Date souhaitee</label>'
+      '<input id="d-date" name="date" type="date"></div>')
+    # L'usage prevu est demande DES le formulaire : c'est lui qui fixe le
+    # prix, et le demander plus tard oblige a refaire le devis.
+    A('<div class="full"><label for="d-usage">Usage prevu des photos</label>'
+      '<select id="d-usage" name="usage" multiple size="5">'
+      '<option>Usage interne</option><option>Site web</option>'
+      '<option>Reseaux sociaux</option><option>Fiches produit / '
+      'e-commerce</option><option>Presse et relations publiques</option>'
+      '<option>Affichage et publicite</option></select></div>')
+    A('<div class="full"><label for="d-msg">Le projet en quelques '
+      'lignes</label><textarea id="d-msg" name="message" rows="4" required>'
+      '</textarea></div>')
+    A('<label class="cms-cons"><input type="checkbox" name="donnees" '
+      'required><span><b>Donnees personnelles.</b> Mes coordonnees servent a '
+      'repondre a cette demande de devis et a rien d\'autre. Je peux en '
+      'demander la suppression a tout moment.</span></label>')
+    A('<label class="cms-cons"><input type="checkbox" name="droit_image" '
+      'required><span><b>Droit a l\'image des personnes photographiees.</b> '
+      'Je m\'engage a ce que chaque personne presente sur les images signe '
+      'une autorisation avant la seance, et a signaler la presence de '
+      'mineurs des la demande.</span></label>')
+    A('<div class="full"><button class="cms-btn" type="submit">Demander le '
+      'devis</button></div>')
+    A('</form>')
+    A('<p class="cms-note"><b>Ce formulaire n\'envoie encore rien</b> — il '
+      'attend l\'adresse de reception et l\'entite juridique, comme les deux '
+      'autres pages.</p>')
+    A('</div></section>')
+
+    # FAQ
+    A('<section class="cms-s" id="faq-photo"><div class="cms-w">')
+    A('<p class="cms-eb">Questions</p>')
+    A('<h2>Ce qu\'on demande avant de commander</h2>')
+    A('<div class="cms-faq" style="margin-top:22px">')
+    for q, r in PHOTO_FAQ:
+        A('<details><summary>%s</summary><div class="a">%s</div></details>'
+          % (e(q), e(r)))
+    A('</div>')
+    A('</div></section>')
+
+    A('</div>')
+    return '\n'.join(o)
+
+
 SCRIPT_CAT = """
 /* Le catalogue lit ses fiches dans catalogue.json : le HTML ne contient
    aucune fiche en dur. Ajouter un mannequin = une ligne de donnees, pas une
@@ -448,7 +657,8 @@ SCRIPT_CAT = """
  function carte(m){
   return '<article class="cms-mn">'
    +'<figure class="cms-fig" data-img="'+esc(m.photo)+'" data-ratio="3/4">'
-   +'<div class="ph"><b>Photo a deposer</b><span>'+esc(m.photo)+'</span></div>'
+   +'<div class="ph" style="aspect-ratio:3/4"><b>Photo a deposer</b>'
+   +'<span>'+esc(m.photo)+'</span></div>'
    +'</figure><div class="bd">'
    +'<div class="nm"><b>'+esc(m.prenom)+' '+esc(m.initiale)+'</b>'
    +'<span class="dispo'+(m.disponible?'':' non')+'">'
@@ -542,7 +752,7 @@ def main():
     paste = os.path.join(ICI, 'paste')
     os.makedirs(paste, exist_ok=True)
 
-    c, m = page_concours(), page_mannequins()
+    c, m, p = page_concours(), page_mannequins(), page_photographie()
 
     ecrits = []
     for chemin, contenu in [
@@ -551,9 +761,12 @@ def main():
                    c, SCRIPT_PH)),
         (os.path.join(docs, 'mannequins.html'),
          enveloppe('Catalogue mannequins', m, SCRIPT_PH_FN + SCRIPT_CAT)),
+        (os.path.join(docs, 'photographie.html'),
+         enveloppe('Service de photographie', p, SCRIPT_PH)),
         (os.path.join(paste, 'concours.html'), bloc(c, SCRIPT_PH)),
         (os.path.join(paste, 'mannequins.html'),
          bloc(m, SCRIPT_PH_FN + SCRIPT_CAT)),
+        (os.path.join(paste, 'photographie.html'), bloc(p, SCRIPT_PH)),
         (os.path.join(docs, 'catalogue.json'),
          json.dumps(FICHES, ensure_ascii=False, indent=1)),
     ]:
@@ -569,7 +782,9 @@ def main():
            '<h1>Apercus</h1>'
            '<a href="concours.html">Concours de miss — page unique</a>'
            '<a href="mannequins.html">Catalogue mannequin feminin '
-           '(%d fiches)</a>' % len(FICHES))
+           '(%d fiches)</a>'
+           '<a href="photographie.html">Service de photographie '
+           '(%d prestations)</a>' % (len(FICHES), len(PHOTO_PRESTATIONS)))
     p = os.path.join(docs, 'index.html')
     open(p, 'w', encoding='utf-8').write(idx)
     ecrits.append((p, len(idx.encode('utf-8'))))
